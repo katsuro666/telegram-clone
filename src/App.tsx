@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import { Telegram } from './modules/Telegram';
 
 function App() {
   return (
     <div className="App">
-      <h1>Telegram clone</h1>
+      <Telegram />
     </div>
   );
 }
