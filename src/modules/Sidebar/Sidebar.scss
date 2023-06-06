@@ -6,3 +6,25 @@
   height: 100vh;
   border-right: 1px solid rgba(35, 35, 35, 1);
 }
+
+.sidebar__new-msg {
+  position: absolute;
+  bottom: 2%;
+  right: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #8774e1;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #6759ae;
+  }
+}
+
+.new-msg__icon {
+  color: #ffffff;
+}
