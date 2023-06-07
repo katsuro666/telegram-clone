@@ -9,7 +9,7 @@
 }
 
 .sidebar__new-msg {
-  position: fixed;
+  position: fixed!important;
   bottom: 2%;
   left: 20%;
   display: flex;
@@ -18,11 +18,11 @@
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background-color: #8774e1;
+  background-color: #8774e1!important;
   cursor: pointer;
 
   &:hover {
-    background-color: #6759ae;
+    background-color: #6759ae!important;
   }
 }
 
