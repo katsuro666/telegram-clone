@@ -3,6 +3,8 @@ import { Button } from '@mui/material'
 import { auth, provider } from '../../firebase'
 import './Login.scss'
 import { signInWithRedirect } from 'firebase/auth'
+import logo from './assets/logo.png'
+import googleLetter from './assets/G-logo.png'
 
 export function Login() {
 
@@ -12,11 +14,29 @@ export function Login() {
 
   return (
     <div className='login'>
-      <div className="login__telegram">
-        <img src="" alt="" />
-        <h1 className="header">Telegram</h1>
+      <div className="login__container">
+        <img src={logo} alt="telegram logo" className='login__logo' />
+        <h1 className="login__header">Telegram</h1>
       </div>
-      <Button variant='outlined' onClick={signIn} className='login__button'>Log In</Button>
+      <div className="login__buttons">
+        <Button variant='contained' onClick={signIn} className='login__button'>
+          <div className="img-section">
+            <img src={googleLetter} alt="" className='g-letter' />
+          </div>
+          <span className="btn-text">Sign in with Google</span>
+        </Button>
+
+        {/* buttons for email sign in / sign up */}
+        
+        {/* <Button variant='contained' className='login__button'>
+          <div className="img-section"></div>
+          <span className="btn-text">Sign in with email</span>
+        </Button>
+        <Button variant='contained' className='login__button'>
+          <div className="img-section"></div>
+          <span className="btn-text">Sign up</span>
+        </Button> */}
+      </div>
     </div>
   )
 }
