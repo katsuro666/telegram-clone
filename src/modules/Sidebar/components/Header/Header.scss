@@ -1,4 +1,5 @@
 .sidebar__header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,14 +62,20 @@
 
   &:focus  {
     outline: none;
-
-    // .header__searchIcon {
-    //   color: #8774e1;
-    // }
-
-    // .header__search {
-    //   border-color: #8774e1;
-    // }
   }
 
+}
+
+.menu-show {
+  // display: block;
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.2s ease-in-out;
+}
+
+.--hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.5s ease-in-out 0.3s;
 }
