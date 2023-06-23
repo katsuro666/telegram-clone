@@ -1,11 +1,11 @@
 import React from 'react'
-import { Thread } from './components'
 import './Threads.scss'
 
-export function Threads() {
+export function Threads(props: any) {
+
   return (
     <div className="sidebar__threads">
-      <Thread />
+      {props.children}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import './Thread.scss'
 
-export function Thread() {
+export function Thread(props: any) {
   let date = new Date().toTimeString().replace(/ .*/, '');
 
   return (
@@ -11,10 +11,10 @@ export function Thread() {
       <Avatar />
       <div className="thread__info">
         <div className="thread__top-row">
-          <div className="thread__name">Name</div>
+          <span className="thread__name">{props.threadName}</span>
           <div className="thread__indicators">
-          <DoneAllIcon className='thread__status' />
-          <span className="thread__date">{date}</span>
+            <DoneAllIcon className='thread__status' />
+            <span className="thread__date">{date}</span>
           </div>
         </div>
         <div className="thread__bottom-row">
