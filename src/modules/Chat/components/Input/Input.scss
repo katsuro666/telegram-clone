@@ -51,6 +51,7 @@
   right: -55px;
   bottom: 22px;
   background-color: #8774e1!important;
+  z-index: 10;
 
   & * {
     color: white;
@@ -69,29 +70,4 @@
   &:hover {
     background-color: #aaaaaa22!important;
   }
-}
-
-.textarea {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  resize: both;
-  min-height: 40px;
-  line-height: 20px;
-}
-
-.textarea[contenteditable]:empty::before {
-  content: "Placeholder still possible";
-  color: gray;
-}
-
-.textarea {
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 1px 6px;
-}
-
-.ava {
-  max-width: 500px;
 }
