@@ -7,7 +7,7 @@ export function Thread(props: any) {
   let date = new Date().toTimeString().replace(/ .*/, '');
 
   return (
-    <div className='thread'>
+    <li className='thread'>
       <Avatar />
       <div className="thread__info">
         <div className="thread__top-row">
@@ -22,6 +22,6 @@ export function Thread(props: any) {
           <div className="thread__unread-messages">5</div>
         </div>
       </div>
-    </div>
+    </li>
   )
 }

@@ -4,8 +4,8 @@ import './Threads.scss'
 export function Threads(props: any) {
 
   return (
-    <div className="sidebar__threads">
+    <ul className="sidebar__threads">
       {props.children}
-    </div>
+    </ul>
   )
 }
