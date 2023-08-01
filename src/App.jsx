@@ -1,10 +1,10 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
+import { Telegram } from 'modules/Telegram';
 
 function App() {
   return (
     <div className="App">
-      <h1>Telegram clone</h1>
+      <Telegram />
     </div>
   );
 }
