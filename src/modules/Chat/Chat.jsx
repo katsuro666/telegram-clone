@@ -9,7 +9,7 @@ export function Chat() {
         <Header />
         <div className="chat__container">
           <Bubbles />
-          {/* <Input /> */}
+          <Input />
         </div>
       </div>
     </div>
