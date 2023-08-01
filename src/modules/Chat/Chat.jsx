@@ -8,8 +8,8 @@ export function Chat() {
       <div className="chat">
         <Header />
         <div className="chat__container">
-          {/* <Bubbles />
-          <Input /> */}
+          <Bubbles />
+          {/* <Input /> */}
         </div>
       </div>
     </div>

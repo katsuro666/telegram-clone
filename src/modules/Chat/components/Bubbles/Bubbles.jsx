@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import { selectThreadId } from 'features/threadSlice'
 // import { useSelector } from 'react-redux'
 import db from '../../../../firebase'
-// import { Message } from '../Message'
+import { Message } from '../Message'
 import './Bubbles.scss'
 
 export function Bubbles() {
@@ -28,10 +28,10 @@ export function Bubbles() {
   // }, [threadId])
 
   return (
-    <div className='chat__bubbles'>
-      {/* { messages.map(({ id, data }) =>(
+    <div className={messages.length ? 'chat__bubbles --scrollable' : 'chat__bubbles'}>
+      { messages.map(({ id, data }) =>(
         <Message key = {id} id = {id} data = {data} />
-        ))} */}
+        ))}
     </div>
   )
 }
