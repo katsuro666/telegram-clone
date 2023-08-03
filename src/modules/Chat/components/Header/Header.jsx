@@ -12,7 +12,7 @@ export function Header() {
         <Avatar />
         <div className="chat__user">
           <h4 className="user__name">Name</h4>
-          <p className="user__last-seen">last seen recently</p>
+          <p className="user__last-seen">last seen</p>
         </div>
       </div>
       <div className="chat__utils">
