@@ -6,8 +6,8 @@ import { Header } from './components'
 import { Threads } from './components/Threads';
 import { Thread } from './components/Threads/components';
 import { db } from '../../firebase';
-import './Sidebar.scss';
 import { selectUser } from 'features/userSlice';
+import './Sidebar.scss';
 
 
 export function Sidebar() {
@@ -38,9 +38,8 @@ export function Sidebar() {
       <Header />
       <Threads > 
         {threads.map(item => (
-          <Thread key={item.id} threadName={item.data.threadName} />
+          <Thread key={item.id} id={item.id} threadName={item.data.threadName} />
         ))}
-        <Thread key={1} threadName={'test'} />
       </Threads>
       <IconButton className="sidebar__new-msg" onClick={addThread}>
         <CreateIcon className="new-msg__icon"/>

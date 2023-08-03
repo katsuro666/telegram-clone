@@ -2,6 +2,7 @@
   display: flex;
   padding: 10px;
   align-items: center;
+  height: 72px;
 
   &:hover {
     cursor: pointer;
@@ -15,6 +16,7 @@
   flex-direction: column;
   flex: 1;
   margin-left: 15px;
+  height: 57px;
 }
 
 .thread__top-row {

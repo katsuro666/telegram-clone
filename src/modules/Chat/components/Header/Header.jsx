@@ -4,14 +4,20 @@ import SearchIcon from '@mui/icons-material/Search'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Avatar, IconButton } from '@mui/material'
 import './Header.scss'
+import { selectThreadId, selectThreadName } from 'features/threadSlice'
+import { useSelector } from 'react-redux'
 
 export function Header() {
+
+  const threadId = useSelector(selectThreadId)
+  const threadName = useSelector(selectThreadName)
+  
   return (
     <div className='chat__header'>
       <div className="chat__info">
         <Avatar />
         <div className="chat__user">
-          <h4 className="user__name">Name</h4>
+          <h4 className="user__name">{ threadId ? threadName : "Click on any chat Name"}</h4>
           <p className="user__last-seen">last seen</p>
         </div>
       </div>
