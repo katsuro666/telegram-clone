@@ -6,15 +6,20 @@ import { Avatar, IconButton } from '@mui/material'
 import './Header.scss'
 import { selectThreadId, selectThreadName } from 'features/threadSlice'
 import { useSelector } from 'react-redux'
+import { selectUser } from 'features/userSlice'
 
 export function Header() {
 
   const threadId = useSelector(selectThreadId)
   const threadName = useSelector(selectThreadName)
+  const user = useSelector(selectUser)
+
+  // TODO add threadname avatar
   
   return (
     <div className='chat__header'>
       <div className="chat__info">
+        {/* {threadId ? <Avatar src={user.photo} /> : ''} */}
         <Avatar />
         <div className="chat__user">
           <h4 className="user__name">{ threadId ? threadName : "Click on any chat Name"}</h4>

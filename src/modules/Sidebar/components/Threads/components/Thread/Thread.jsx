@@ -5,10 +5,8 @@ import './Thread.scss'
 import { useDispatch } from 'react-redux';
 import { db } from '../../../../../../firebase';
 import { setThread } from 'features/threadSlice';
-import * as timeago from 'timeago.js'
 
 export function Thread(props) {
-  let date = new Date().toTimeString().replace(/ .*/, '');
 
   const dispatch = useDispatch();
   const [threadInfo, setThreadInfo] = useState([])
@@ -35,13 +33,13 @@ export function Thread(props) {
         })
       )
       }>
-      <Avatar src={threadInfo[0]?.photo} />
+      <Avatar src={props.photo} />
       <div className="thread__info">
         <div className="thread__top-row">
           <span className="thread__name">{props.threadName}</span>
           <div className="thread__indicators">
             {/* <DoneAllIcon className='thread__status' /> */}
-            <small className="thread__date">{timeago.format(new Date(threadInfo[0]?.timestamp?.toDate()))}</small>
+            <small className="thread__date">{threadInfo[0]?.timestamp?.toDate().toLocaleString('en-gb', { hour: 'numeric', minute: 'numeric' })}</small>
           </div>
         </div>
         <div className="thread__bottom-row">

@@ -38,7 +38,7 @@ export function Sidebar() {
       <Header />
       <Threads > 
         {threads.map(item => (
-          <Thread key={item.id} id={item.id} threadName={item.data.threadName} />
+          <Thread key={item.id} id={item.id} threadName={item.data.threadName} photo={item.data.photo} />
         ))}
       </Threads>
       <IconButton className="sidebar__new-msg" onClick={addThread}>
