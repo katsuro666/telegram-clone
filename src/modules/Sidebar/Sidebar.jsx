@@ -16,21 +16,25 @@ export function Sidebar() {
   const [threads, setThreads] = useState([])
 
   useEffect(() => {
-    db.collection('threads').onSnapshot((snapshot) => {
-      setThreads(snapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      })))
-    })
+    db.collection('users').doc(user.uid).collection('threads').onSnapshot((snapshot) => {
+        setThreads(snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        })))
+      })
   })
 
   const addThread = async () => {
     const threadName = prompt('Enter a thread name')
-    if (threadName) {
-      db.collection('threads').add({
-        threadName: threadName
-      })
-    }
+    alert(threadName)
+
+    // TODO: remove this method to the Sidebar search input
+
+    // if (threadName) {
+    //   db.collection('users').doc(user.uid).collection('threads').add({
+    //     threadName: threadName
+    //   })
+    // }
   }
   
   return (
