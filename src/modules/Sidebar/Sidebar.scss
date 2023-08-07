@@ -30,3 +30,9 @@
 .new-msg__icon {
   color: #ffffff;
 }
+
+.search__group {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

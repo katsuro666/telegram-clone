@@ -4,16 +4,19 @@ import { useSelector } from 'react-redux'
 import { db } from '../../../../firebase'
 import { Message } from '../Message'
 import './Bubbles.scss'
+import { selectUser } from 'features/userSlice'
 
 export function Bubbles() {
 
   const [messages, setMessages] = useState([])
   const threadId = useSelector(selectThreadId)
-
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     if (threadId) {
       db
+      .collection('users')
+      .doc(user.uid)
       .collection('threads')
       .doc(threadId)
       .collection('messages')

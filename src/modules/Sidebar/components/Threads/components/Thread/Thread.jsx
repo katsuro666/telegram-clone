@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar'
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import './Thread.scss'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../../../../../firebase';
 import { setThread } from 'features/threadSlice';
+import { selectUser } from 'features/userSlice';
 
 export function Thread(props) {
 
   const dispatch = useDispatch();
   const [threadInfo, setThreadInfo] = useState([])
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     db
+    .collection('users')
+    .doc(user.uid)
     .collection('threads')
     .doc(props.id)
     .collection('messages')
@@ -20,7 +24,7 @@ export function Thread(props) {
     .onSnapshot((snapshot) => {
       setThreadInfo(snapshot.docs.map((doc) => doc.data()))
     })
-  }, [props.id])
+  }, [props.id, user.uid])
 
   return (
     <li 

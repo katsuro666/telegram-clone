@@ -29,6 +29,10 @@
   color: #aaaaaa;
 }
 
+.arrow-back__btn {
+  color: #aaaaaa;
+}
+
 .header__search {
   display: flex;
   align-items: center;
@@ -41,6 +45,11 @@
   background-color: #181818;
   height: 42px;
   transition: 0.2s ease-in-out;
+
+  &:focus-within {
+    border: 2px solid;
+    border-color: #8774e1;
+  }
 
   &:hover {
     border-color: rgba(255, 255, 255, 0.5);
@@ -63,7 +72,6 @@
   &:focus  {
     outline: none;
   }
-
 }
 
 .menu-show {

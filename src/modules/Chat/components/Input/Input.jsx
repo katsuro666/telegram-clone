@@ -22,7 +22,7 @@ export function Input() {
     
     console.log(input)
 
-    db.collection('threads').doc(threadId).collection('messages').add({
+    db.collection('users').doc(user.uid).collection('threads').doc(threadId).collection('messages').add({
       timestamp: serverTimestamp(),
       message: input,
       uid: user.uid,
