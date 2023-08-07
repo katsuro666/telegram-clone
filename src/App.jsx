@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Telegram } from 'modules/Telegram';
 import { Login } from 'modules/Login';
 import { login, logout, selectUser } from 'features/userSlice';
 import { auth } from './firebase';
+import CircularProgress from '@mui/material/CircularProgress';
+import './App.scss';
+
 
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const [isUserLoaded, setIsUserLoaded] = useState(false)
+  
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(
           login({
@@ -23,12 +28,23 @@ function App() {
       } else {
         dispatch(logout())
       }
+      setIsUserLoaded(true)
     })
+
+    return () => unsubscribe();
   }, [dispatch])
 
   return (
     <div className="App">
-      {user ? <Telegram /> : <Login />}
+      {!isUserLoaded ? (
+        <div className="loading-screen">
+          <CircularProgress />
+        </div>
+      ) : (
+        <>
+          {user ? <Telegram /> : <Login />}
+        </>
+      )}
     </div>
   );
 }
