@@ -6,7 +6,7 @@ import './Header.scss';
 import { Menu } from './components';
 import useOutsideClick from 'app/hooks/useOutsideClick';
 
-export function Header({ searchIsOpen, setSearchIsOpen }) {
+export function Header({ searchIsOpen, setSearchIsOpen, searchBarValue, setSearchBarValue }) {
   const { ref, isShow, setIsShow } = useOutsideClick(false);
 
   return (
@@ -32,6 +32,10 @@ export function Header({ searchIsOpen, setSearchIsOpen }) {
           autoComplete='off'
           className='header__input'
           onClick={() => setSearchIsOpen(true)}
+          value={searchBarValue}
+          onChange={(e) => {
+            setSearchBarValue(e.target.value)
+          }}
         />
       </div>
       <Menu className={isShow ? 'menu-show' : '--hide'} innerRef={ref} />
