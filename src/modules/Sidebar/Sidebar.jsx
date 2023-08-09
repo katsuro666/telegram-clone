@@ -27,7 +27,7 @@ export function Sidebar() {
       .onSnapshot((snapshot) => {
         setThreads(
           snapshot.docs.map((doc) => ({
-            id: doc.id,
+            uid: doc.id,
             data: doc.data(),
           }))
         );
@@ -76,17 +76,17 @@ export function Sidebar() {
       {searchIsOpen ? (
         <Threads>
           {filteredSearchList.map((item) => (
-            <UserSearchItem key={item.uid} user={item} setSearchIsOpen={setSearchIsOpen} />
+            <UserSearchItem key={item.uid} userItem={item} setSearchIsOpen={setSearchIsOpen} />
           ))}
         </Threads>
       ) : (
         <Threads>
           {threads.map((item) => (
             <Thread
-              key={item.id}
-              id={item.id}
+              key={item.uid}
+              id={item.uid}
               threadName={item.data.threadName}
-              photo={item.data.photo}
+              photo={searchList.find(user => user.uid === item.uid)?.photo}
             />
           ))}
         </Threads>
