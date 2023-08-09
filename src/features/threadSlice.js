@@ -4,7 +4,9 @@ export const threadSlice = createSlice({
   name: 'thread',
   initialState: {
     threadId: null,
-    threadName: null
+    threadName: null,
+    type: null,
+    authorizedUsers: null,
   },
   reducers: {
     setThread: (state, action) => {

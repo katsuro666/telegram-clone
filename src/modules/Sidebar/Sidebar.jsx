@@ -76,7 +76,7 @@ export function Sidebar() {
       {searchIsOpen ? (
         <Threads>
           {filteredSearchList.map((item) => (
-            <UserSearchItem key={item.uid} userItem={item} setSearchIsOpen={setSearchIsOpen} />
+            <UserSearchItem key={item.uid} selectedUser={item} setSearchIsOpen={setSearchIsOpen} />
           ))}
         </Threads>
       ) : (
