@@ -21,13 +21,14 @@ export function Sidebar() {
   const [filteredSearchList, setFilteredSearchList] = useState([]);
 
   useEffect(() => {
-    db.collection('users')
-      .doc(user.uid)
-      .collection('threads')
+    db.collection('rooms')
+      .where('authorizedUsers', 'array-contains', user.uid)
       .onSnapshot((snapshot) => {
         setThreads(
           snapshot.docs.map((doc) => ({
-            uid: doc.id,
+            chatWith: doc
+              .data()
+              .authorizedUsers.find((uid) => uid !== user.uid),
             data: doc.data(),
           }))
         );
@@ -55,7 +56,7 @@ export function Sidebar() {
   }, [searchBarValue, searchList]);
 
   const addThread = async () => {
-    alert('Use the search bar to add a thread')
+    alert('temporarily removed method');
     // ! temporarily removed method
     // const threadName = prompt('Enter a thread name');
     // if (threadName) {
@@ -76,17 +77,22 @@ export function Sidebar() {
       {searchIsOpen ? (
         <Threads>
           {filteredSearchList.map((item) => (
-            <UserSearchItem key={item.uid} selectedUser={item} setSearchIsOpen={setSearchIsOpen} />
+            <UserSearchItem
+              key={item.uid}
+              selectedUser={item}
+              setSearchIsOpen={setSearchIsOpen}
+            />
           ))}
         </Threads>
       ) : (
         <Threads>
           {threads.map((item) => (
             <Thread
-              key={item.uid}
-              id={item.uid}
-              threadName={item.data.threadName}
-              photo={searchList.find(user => user.uid === item.uid)?.photo}
+              key={item.data.id}
+              selectedUser={searchList.find(
+                (user) => user.uid === item.chatWith
+              )}
+              messageData={item.data}
             />
           ))}
         </Threads>

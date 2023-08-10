@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Input.scss';
 import SendIcon from '@mui/icons-material/Send';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
@@ -7,40 +7,23 @@ import { IconButton } from '@mui/material';
 import { db } from '../../../../firebase';
 import { serverTimestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
-import { selectThreadId, selectThreadName } from 'features/threadSlice';
+import { selectThreadId } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 export function Input() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
-  const threadName = useSelector(selectThreadName);
   const threadId = useSelector(selectThreadId);
   const user = useSelector(selectUser);
 
-  const [ users ] = useCollectionData(
-    // db.collection('users').doc(user.uid)
-    // db.collection('users')
-  )
-
   const sendMessage = async () => {
-    db.collection('users')
-      .doc(user.uid)
-      .collection('threads')
-      .doc(threadId)
-      .collection('messages')
-      .add({
-        timestamp: serverTimestamp(),
-        message: input,
-        uid: user.uid,
-        photo: user.photo,
-        email: user.email,
-        displayName: user.displayName,
-      });
+    db.collection('rooms').doc(threadId).collection('messages').add({
+      timestamp: serverTimestamp(),
+      message: input,
+      uid: user.uid,
+    });
 
     setInput('');
   };
-
 
   const handleKeyDown = (e) => {
     e.key === 'Enter' && sendMessage();
