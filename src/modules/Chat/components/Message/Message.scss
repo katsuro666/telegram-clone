@@ -19,6 +19,15 @@
   word-break: break-word;
 }
 
+.message__contents--from {
+  background-color: #7e6dd1;
+}
+
+.message__contents--to {
+  background-color: #212121;
+}
+
+
 .message__content {
   color: #fff;
 }

@@ -11,7 +11,10 @@ export function Message({ data: { timestamp, message, uid } }) {
       className={`message ${
         user.uid === uid ? 'message__from' : 'message__to'
       }`}>
-      <div className='message__contents'>
+      <div
+        className={`message__contents ${
+          user.uid === uid ? 'message__contents--from' : 'message__contents--to'
+        }`}>
         <p className='message__content'>{message}</p>
         <small className='message__timestamp'>
           {timestamp?.toDate().toLocaleTimeString('en-gb', {
