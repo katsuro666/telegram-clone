@@ -23,8 +23,12 @@
   color: #fff;
 }
 
-.message__sender {
+.message__from {
   margin-left: auto;
+}
+
+.message__to {
+  margin-right: auto;
 }
 
 .message__timestamp {

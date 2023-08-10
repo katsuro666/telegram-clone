@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './UserSearchItem.scss';
 import { selectUser } from 'features/userSlice';
 import { db } from '../../../../firebase';
+import { collection, getDocs, or, query, where } from 'firebase/firestore';
 
 export function UserSearchItem({ selectedUser, setSearchIsOpen }) {
   const dispatch = useDispatch();
@@ -13,17 +14,21 @@ export function UserSearchItem({ selectedUser, setSearchIsOpen }) {
   const setNewThread = async () => {
     let roomId = '';
 
-    const isRoomCreated = await db
-      .collection('rooms')
-      .where('uniqueId', '==', user.uid + selectedUser.uid)
-      .get()
+    const roomsRef = collection(db, 'rooms');
+
+    const q = query(
+      roomsRef,
+      or(
+        where('uniqueId', '==', user.uid + selectedUser.uid),
+        where('uniqueId', '==', selectedUser.uid + user.uid)
+      )
+    );
+
+    const isRoomCreated = await getDocs(q)
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          console.log('room does not exist, creating room... ');
           return false;
         } else {
-          console.log('room exists');
-          console.log('room info: ', querySnapshot.docs[0].data());
           roomId = querySnapshot.docs[0].id;
           return true;
         }
