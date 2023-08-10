@@ -76,13 +76,16 @@ export function Sidebar() {
       />
       {searchIsOpen ? (
         <Threads>
-          {filteredSearchList.map((item) => (
-            <UserSearchItem
-              key={item.uid}
-              selectedUser={item}
-              setSearchIsOpen={setSearchIsOpen}
-            />
-          ))}
+          {filteredSearchList.map(
+            (item) =>
+              item.uid !== user.uid && (
+                <UserSearchItem
+                  key={item.uid}
+                  selectedUser={item}
+                  setSearchIsOpen={setSearchIsOpen}
+                />
+              )
+          )}
         </Threads>
       ) : (
         <Threads>

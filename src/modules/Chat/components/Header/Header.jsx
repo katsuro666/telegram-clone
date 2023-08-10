@@ -31,18 +31,6 @@ export function Header() {
     fetchData();
   }, [threadId, threadName]);
 
-  // useEffect(() => {
-  //   db.collection('users')
-  //     .doc(user.uid)
-  //     .collection('threads')
-  //     .doc(threadId)
-  //     .collection('messages')
-  //     .orderBy('timestamp', 'desc')
-  //     .onSnapshot((snapshot) => {
-  //       setThreadInfo(snapshot.docs.map((doc) => doc.data()));
-  //     });
-  // }, [threadId, user.uid]);
-
   useEffect(() => {
     db.collection('rooms')
       .doc(threadId)
