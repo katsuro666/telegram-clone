@@ -7,12 +7,11 @@ import { auth, db } from './firebase';
 import CircularProgress from '@mui/material/CircularProgress';
 import './App.scss';
 
-
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const [isUserLoaded, setIsUserLoaded] = useState(false)
-  
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -23,32 +22,31 @@ function App() {
             email: authUser.email,
             displayName: authUser.displayName,
           })
-        )
+        );
+
         db.collection('users').doc(authUser.uid).set({
           uid: authUser.uid,
           photo: authUser.photoURL,
           email: authUser.email,
           displayName: authUser.displayName,
-        })
+        });
       } else {
-        dispatch(logout())
+        dispatch(logout());
       }
-      setIsUserLoaded(true)
-    })
+      setIsUserLoaded(true);
+    });
 
     return () => unsubscribe();
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className='App'>
       {!isUserLoaded ? (
-        <div className="loading-screen">
+        <div className='loading-screen'>
           <CircularProgress />
         </div>
       ) : (
-        <>
-          {user ? <Telegram /> : <Login />}
-        </>
+        <>{user ? <Telegram /> : <Login />}</>
       )}
     </div>
   );
