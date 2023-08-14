@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
     "@reduxjs/toolkit": "^1.9.5",
+    "dayjs": "^1.11.9",
     "firebase": "^9.22.1",
     "firebase-admin": "^11.9.0",
     "node-sass": "^7.0.3",

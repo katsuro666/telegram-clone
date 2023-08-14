@@ -7,20 +7,28 @@ import './Header.scss';
 import { selectThreadId, selectThreadName } from 'features/threadSlice';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'features/userSlice';
-import * as timeago from 'timeago.js';
-import { db } from '../../../../firebase';
+import { db, realtimeDb } from '../../../../firebase';
+import { child, get, onValue, ref } from 'firebase/database';
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime)
+
 
 export function Header() {
   const threadId = useSelector(selectThreadId);
   const threadName = useSelector(selectThreadName);
   const user = useSelector(selectUser);
   const [threadInfo, setThreadInfo] = useState([]);
-  const [userList, setUserList] = useState([]);
+
+  const [interlocutorList, setInterlocutorList] = useState([]);
+  const [interlocutorStatus, setInterlocutorStatus] = useState(null);
+  const [interlocutorLastOnline, setInterlocutorLastOnline] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await db.collection('users').orderBy('displayName').get();
-      setUserList(
+      setInterlocutorList(
         data.docs
           .map((doc) => ({
             ...doc.data(),
@@ -32,26 +40,33 @@ export function Header() {
   }, [threadId, threadName]);
 
   useEffect(() => {
-    db.collection('rooms')
-      .doc(threadId)
-      .collection('messages')
-      .orderBy('timestamp', 'desc')
-      .onSnapshot((snapshot) => {
-        setThreadInfo(snapshot.docs.map((doc) => doc.data()));
-      });
-  }, [threadId, user.uid]);
+    const dbRef = ref(realtimeDb);
+    const statusRef = ref(realtimeDb, `users/${interlocutorList[0]?.uid}/status`);
+    const lastOnlineRef = ref(realtimeDb, `users/${interlocutorList[0]?.uid}/lastOnline`);
+
+    onValue(statusRef, (snap) => {
+      const data = snap.val();
+      if (data === 'online') {
+        setInterlocutorStatus('online');
+      } else {
+        setInterlocutorStatus('offline');
+        get(child(dbRef, `users/${interlocutorList[0]?.uid}/lastOnline`)).then((snapshot) => {
+          if (snapshot.exists()) {
+            setInterlocutorLastOnline(snapshot.val());
+          }
+        });
+      }
+    });
+  }, [interlocutorList]);
 
   return (
     <div className='chat__header'>
       <div className='chat__info'>
-        <Avatar src={userList[0]?.photo} />
+        <Avatar src={interlocutorList[0]?.photo} />
         <div className='chat__user'>
           <h4 className='user__name'>{threadName}</h4>
           <p className='user__last-seen'>
-            last seen{' '}
-            {timeago.format(
-              threadInfo[0]?.timestamp?.toDate().toLocaleString('en')
-            )}
+            last seen {dayjs(new Date(interlocutorLastOnline).toString()).fromNow()}
           </p>
         </div>
       </div>
