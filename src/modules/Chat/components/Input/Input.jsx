@@ -20,6 +20,7 @@ export function Input() {
       timestamp: serverTimestamp(),
       message: input,
       uid: user.uid,
+      seen: false,
     });
 
     setInput('');

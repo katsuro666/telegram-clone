@@ -91,7 +91,7 @@ export function Sidebar() {
         <Threads>
           {threads.map((item) => (
             <Thread
-              key={item.data.id}
+              key={item.data.uniqueId}
               selectedUser={searchList.find(
                 (user) => user.uid === item.chatWith
               )}
