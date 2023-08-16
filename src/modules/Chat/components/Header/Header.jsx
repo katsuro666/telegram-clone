@@ -9,11 +9,10 @@ import { useSelector } from 'react-redux';
 import { selectUser } from 'features/userSlice';
 import { db, realtimeDb } from '../../../../firebase';
 import { child, get, onValue, ref } from 'firebase/database';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(relativeTime)
-
+dayjs.extend(relativeTime);
 
 export function Header() {
   const threadId = useSelector(selectThreadId);
@@ -24,6 +23,7 @@ export function Header() {
   const [interlocutorList, setInterlocutorList] = useState([]);
   const [interlocutorStatus, setInterlocutorStatus] = useState(null);
   const [interlocutorLastOnline, setInterlocutorLastOnline] = useState(null);
+  const [lastSeenText, setLastSeenText] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,10 +42,9 @@ export function Header() {
   useEffect(() => {
     const dbRef = ref(realtimeDb);
     const statusRef = ref(realtimeDb, `users/${interlocutorList[0]?.uid}/status`);
-    const lastOnlineRef = ref(realtimeDb, `users/${interlocutorList[0]?.uid}/lastOnline`);
 
-    onValue(statusRef, (snap) => {
-      const data = snap.val();
+    const updateLastOnline = (snapshot) => {
+      const data = snapshot.val();
       if (data === 'online') {
         setInterlocutorStatus('online');
       } else {
@@ -56,8 +55,30 @@ export function Header() {
           }
         });
       }
-    });
-  }, [interlocutorList]);
+    };
+
+    const onValueCallback = onValue(statusRef, updateLastOnline);
+
+    return () => {
+      onValueCallback();
+    };
+  }, [interlocutorList, interlocutorStatus]);
+
+  useEffect(() => {
+    const updateLastSeen = () => {
+      setLastSeenText(`last seen ${dayjs(new Date(interlocutorLastOnline).toString()).fromNow()}`);
+    };
+
+    if (interlocutorLastOnline === null) {
+      setLastSeenText('loading...');
+    } else {
+      updateLastSeen();
+      var interval = setInterval(() => {
+        updateLastSeen();
+      }, 60000);
+    }
+    return () => clearInterval(interval);
+  }, [interlocutorLastOnline, lastSeenText]);
 
   return (
     <div className='chat__header'>
@@ -65,9 +86,7 @@ export function Header() {
         <Avatar src={interlocutorList[0]?.photo} />
         <div className='chat__user'>
           <h4 className='user__name'>{threadName}</h4>
-          <p className='user__last-seen'>
-            last seen {dayjs(new Date(interlocutorLastOnline).toString()).fromNow()}
-          </p>
+          <p className='user__last-seen'>{interlocutorStatus === 'online' ? 'online' : `${lastSeenText}`}</p>
         </div>
       </div>
       <div className='chat__utils'>
