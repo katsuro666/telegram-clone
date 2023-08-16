@@ -4,9 +4,10 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DoneIcon from '@mui/icons-material/Done';
 import './Thread.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { db } from '../../../../../../firebase';
+import { db, realtimeDb } from '../../../../../../firebase';
 import { selectThreadName, setThread } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
+import { ref, onValue } from 'firebase/database';
 
 export function Thread({ messageData, selectedUser }) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export function Thread({ messageData, selectedUser }) {
   const [unseenMessages, setUnseenMessages] = useState([]);
 
   const [isThreadOpen, setIsThreadOpen] = useState('');
+  const [userStatus, setUserStatus] = useState('');
 
   useEffect(() => {
     db.collection('rooms')
@@ -40,6 +42,25 @@ export function Thread({ messageData, selectedUser }) {
       })
     );
   }, [messageList, user.uid]);
+
+  useEffect(() => {
+    const statusRef = ref(realtimeDb, `users/${selectedUser?.uid}/status`);
+
+    const updateLastOnline = (snapshot) => {
+      const data = snapshot.val();
+      if (data === 'online') {
+        setUserStatus('online');
+      } else {
+        setUserStatus('offline');
+      }
+    };
+
+    const onValueCallback = onValue(statusRef, updateLastOnline);
+
+    return () => {
+      onValueCallback();
+    };
+  }, [selectedUser?.uid, userStatus]);
 
   const openThread = () => {
     dispatch(
@@ -75,7 +96,11 @@ export function Thread({ messageData, selectedUser }) {
 
   return (
     <li className={`thread ${isThreadOpen && 'thread--open'}`} onClick={openThread}>
-      <Avatar src={selectedUser.photo} />
+      <div className={`thread__avatar`}>
+        <Avatar src={selectedUser.photo} />
+        <span className={userStatus === 'online' ? 'thread__avatar--online' : ''}></span>
+      </div>
+      {/* <p>{userStatus}</p> */}
       <div className='thread__info'>
         <div className='thread__top-row'>
           <span className='thread__name'>{selectedUser.displayName}</span>

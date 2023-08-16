@@ -98,3 +98,20 @@
   font-weight: 700;
   font-size: 14px;
 }
+
+.thread__avatar {
+  position: relative;
+}
+
+.thread__avatar--online {
+  position: absolute;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 2px solid #8774e1;
+  background-color: #8774e1;
+  width: 8px;
+  height: 8px;
+  right: 0%;
+  bottom: 0%;
+}
