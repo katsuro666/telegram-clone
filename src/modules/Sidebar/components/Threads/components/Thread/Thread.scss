@@ -2,8 +2,13 @@
   display: flex;
   padding: 10px;
   align-items: center;
-  height: 72px;
+  height: 52px;
   overflow: hidden;
+
+  &--open {
+    background-color: #8774e1!important;
+    border-radius: 20px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -44,11 +49,19 @@
   font-size: 12px;
   line-height: 16px;
   color: #aaaaaa;
+
+  &--open {
+    color: #ffffff;
+  }
 }
 
 .thread__status {
   color: #8774e1;
   font-size: 18px!important;
+
+  &--open {
+    color: #ffffff;
+  }
 }
 
 .thread__bottom-row {
@@ -66,6 +79,10 @@
   color: #aaaaaa;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &--open {
+    color: #ffffff;
+  }
 }
 
 .thread__unread-messages {

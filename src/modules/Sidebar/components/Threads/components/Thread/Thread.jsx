@@ -5,7 +5,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import './Thread.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../../../../../firebase';
-import { setThread } from 'features/threadSlice';
+import { selectThreadName, setThread } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
 
 export function Thread({ messageData, selectedUser }) {
@@ -13,6 +13,8 @@ export function Thread({ messageData, selectedUser }) {
   const [messageList, setMessageList] = useState([]);
   const user = useSelector(selectUser);
   const [unseenMessages, setUnseenMessages] = useState([]);
+
+  const [isThreadOpen, setIsThreadOpen] = useState('');
 
   useEffect(() => {
     db.collection('rooms')
@@ -67,8 +69,12 @@ export function Thread({ messageData, selectedUser }) {
     setUnseenMessages([]);
   };
 
+  // !
+  // TODO add highlight of the thread you are chatting with
+  // !
+
   return (
-    <li className='thread' onClick={openThread}>
+    <li className={`thread ${isThreadOpen && 'thread--open'}`} onClick={openThread}>
       <Avatar src={selectedUser.photo} />
       <div className='thread__info'>
         <div className='thread__top-row'>
@@ -76,12 +82,12 @@ export function Thread({ messageData, selectedUser }) {
           <div className='thread__indicators'>
             {messageList[0]?.uid === user.uid ? (
               messageList[0]?.seen ? (
-                <DoneAllIcon className='thread__status' />
+                <DoneAllIcon className={`thread__status ${isThreadOpen && 'thread__status--open'}`} />
               ) : (
-                <DoneIcon className='thread__status' />
+                <DoneIcon className={`thread__status ${isThreadOpen && 'thread__status--open'}`} />
               )
             ) : null}
-            <small className='thread__date'>
+            <small className={`thread__date ${isThreadOpen && 'thread__date--open'}`}>
               {messageList[0]?.timestamp?.toDate().toLocaleString('en-gb', {
                 hour: 'numeric',
                 minute: 'numeric',
@@ -90,7 +96,9 @@ export function Thread({ messageData, selectedUser }) {
           </div>
         </div>
         <div className='thread__bottom-row'>
-          <span className='thread__preview'>{messageList[0]?.message}</span>
+          <span className={`thread__preview ${isThreadOpen && 'thread__preview--open'}`}>
+            {messageList[0]?.message}
+          </span>
           {unseenMessages.length > 0 && <div className='thread__unread-messages'>{unseenMessages.length}</div>}
         </div>
       </div>
