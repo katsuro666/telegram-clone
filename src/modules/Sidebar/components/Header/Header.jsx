@@ -13,15 +13,9 @@ export function Header({ searchIsOpen, setSearchIsOpen, searchBarValue, setSearc
     <div className='sidebar__header'>
       <div className='header__burger'>
         {searchIsOpen ? (
-          <ArrowBackIcon
-            className='arrow-back__btn'
-            onClick={() => setSearchIsOpen(false)}
-          />
+          <ArrowBackIcon className='arrow-back__btn' onClick={() => setSearchIsOpen(false)} />
         ) : (
-          <MenuIcon
-            className='burger__btn'
-            onClick={() => setIsShow(!isShow)}
-          />
+          <MenuIcon className='burger__btn' onClick={() => setIsShow(!isShow)} />
         )}
       </div>
       <div className='header__search'>
@@ -34,7 +28,7 @@ export function Header({ searchIsOpen, setSearchIsOpen, searchBarValue, setSearc
           onClick={() => setSearchIsOpen(true)}
           value={searchBarValue}
           onChange={(e) => {
-            setSearchBarValue(e.target.value)
+            setSearchBarValue(e.target.value);
           }}
         />
       </div>

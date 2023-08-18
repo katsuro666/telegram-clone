@@ -1,11 +1,11 @@
 .sidebar {
   position: relative;
-  background: #212121;
+  background: var(--surface-color);
   display: flex;
   flex-direction: column;
   flex: .35;
   min-height: 100vh;
-  border-right: 1px solid rgba(35, 35, 35, 1);
+  border-right: var(--sidebar--border);
   height: 100vh;
 }
 
@@ -19,16 +19,16 @@
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background-color: #8774e1!important;
+  background-color: var(--primary-color)!important;
   cursor: pointer;
 
   &:hover {
-    background-color: #6759ae!important;
+    background-color: var(--primary-color)!important;
   }
 }
 
 .new-msg__icon {
-  color: #ffffff;
+  color: var(--button-new-message-color);
 }
 
 .search__group {

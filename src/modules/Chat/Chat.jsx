@@ -9,6 +9,7 @@ export function Chat() {
   
   return (
     <div className='chat--gradient'>
+      <div className="chat--canvas"></div>
       <div className="chat">
         {threadId && (
           <>

@@ -1,14 +1,23 @@
 .chat--gradient {
-  background: linear-gradient(-45deg, #908b62 0%, #5a4ca0 100%);
+  background: var(--chat-background-gradient);
   flex: .75;
 }
 
+.chat--canvas {
+  width: 70%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  background-image: url(../../../public/chat-bg-default.webp); 
+  opacity: var(--chat-background-opacity);
+  background-size: cover;
+}
+
 .chat {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(../../../public/chat-bg.png); 
-  background-size: cover;
   height: 100vh;
 }
 

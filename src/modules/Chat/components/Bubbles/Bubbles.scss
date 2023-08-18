@@ -1,5 +1,5 @@
 .chat__bubbles {
-  color: #fff;
+  color: var(--primary-text-color);
   display: flex;
   flex: 1;
   flex-direction: column-reverse;

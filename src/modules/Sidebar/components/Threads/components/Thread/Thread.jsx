@@ -100,7 +100,6 @@ export function Thread({ messageData, selectedUser }) {
         <Avatar src={selectedUser.photo} />
         <span className={userStatus === 'online' ? 'thread__avatar--online' : ''}></span>
       </div>
-      {/* <p>{userStatus}</p> */}
       <div className='thread__info'>
         <div className='thread__top-row'>
           <span className='thread__name'>{selectedUser.displayName}</span>

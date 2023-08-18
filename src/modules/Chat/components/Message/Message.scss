@@ -9,7 +9,7 @@
 .message__contents {
   display: flex;
   flex-direction: column;
-  background-color: #7e6dd1;
+  // background-color: #7e6dd1;
   font-size: 16px;
   padding: 10px;
   border-radius: 10px;
@@ -20,15 +20,15 @@
 }
 
 .message__contents--from {
-  background-color: #7e6dd1;
+  background-color: var(--message-out-background-color);
 }
 
 .message__contents--to {
-  background-color: #212121;
+  background-color: var(--message-background-color);
 }
 
 .message__content {
-  color: #fff;
+  color: var(--primary-text-color);
 }
 
 .message__from {
@@ -47,11 +47,12 @@
 
 .message__timestamp {
   align-self: flex-end;
-  color: rgba(255, 255, 255, .6);
+  color: var(--message-out-primary-color);
   font-size: 12px;
 }
 
 .message__status {
   font-size: 16px!important;
   margin-left: 2px;
+  color: var(--message-out-primary-color);
 }

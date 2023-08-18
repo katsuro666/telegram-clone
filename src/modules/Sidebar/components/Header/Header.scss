@@ -6,7 +6,7 @@
   height: 40px;
   padding: 10px;
   align-items: center;
-  border-bottom: 1px solid rgb(81, 83, 83);
+  border-bottom: var(--sidebar--border);
 }
 
 .header__burger {
@@ -20,17 +20,17 @@
   border-radius: 50%;
 
   &:hover {
-    background: rgba(170,170,170,.1);
+    background: var(--surface-color-hover);
     cursor: pointer;
   }
 }
 
 .burger__btn {
-  color: #aaaaaa;
+  color: var(--secondary-text-color);
 }
 
 .arrow-back__btn {
-  color: #aaaaaa;
+  color: var(--secondary-text-color);
 }
 
 .header__search {
@@ -41,23 +41,23 @@
   margin: 0 10px;
   border-radius: 22px;
   border: 1px solid;
-  border-color: #2f2f2f;
-  background-color: #181818;
+  border-color: var(--input-search-border-color);
+  background-color: var(--input-search-background-color);
   height: 42px;
   transition: 0.2s ease-in-out;
 
   &:focus-within {
     border: 2px solid;
-    border-color: #8774e1;
+    border-color: var(--primary-color);
   }
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: var(--secondary-color);
   }
 }
 
 .header__searchIcon {
-  color: #aaaaaa;
+  color: var(--secondary-text-color);
 }
 
 .header__input {
@@ -65,7 +65,7 @@
   background: transparent;
   font-size: 100%;
   line-height: 1.15;
-  color: #ffffff;
+  color: var(--primary-text-color);
   margin: 0 10px;
   border: none;
 
@@ -84,5 +84,6 @@
 .--hide {
   opacity: 0;
   visibility: hidden;
+  z-index: -10;
   transition: opacity 0.3s, visibility 0.5s ease-in-out 0.3s;
 }

@@ -7,7 +7,7 @@
   justify-content: center;
   margin: 10px auto 15px;
   width: 100%;
-  background: #212121;
+  background: var(--surface-color);
   border-radius: 15px;
 }
 
@@ -24,7 +24,7 @@
   padding: 8px;
   border: none;
   background: transparent;
-  color: white;
+  color: var(--primary-text-color);
 
   &:focus {
     outline: none;
@@ -50,24 +50,24 @@
   position: absolute!important;
   right: -55px;
   bottom: 22px;
-  background-color: #8774e1!important;
+  background-color: var(--primary-color)!important;
   z-index: 10;
 
   & * {
-    color: white;
+    color: var(--button-new-message-color);
   }
 
   &:hover {
-    background-color: #6759ae!important;
+    background-color: var(--primary-color-hover)!important;
   }
 }
 
 .chat__additional-btn {
   & * {
-    color: #aaaaaa;
+    color: var(--secondary-text-color);
   }
 
   &:hover {
-    background-color: #aaaaaa22!important;
+    background-color: var(--surface-color-hover)!important;
   }
 }

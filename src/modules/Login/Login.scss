@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background: #212121;
-  color: #ffffff;
+  background-color: var(--surface-color);
+  color: var(--primary-text-color);
   height: 100vh;
 }
 
@@ -25,10 +25,8 @@
   width: 40%!important;
   max-width: 340px;
   min-width: 265px!important;
-  
   height: 50px;
   padding: 0!important;
-  background: #8774e1!important;
   border-radius: 50px!important;
   box-shadow: 1px 1px 1px grey;
   white-space: nowrap;
@@ -45,7 +43,7 @@
   flex: .25;
   justify-content: center;
   align-items: center;
-  background: #212121cb;
+  background-color: #fff;
   border-radius: 50px;
   height: 110%;
 }
@@ -57,7 +55,7 @@
 
 .btn-text {
   flex: 1;
-  color: white;
+  color: var(--button-new-message-color);
 }
 
 .login__buttons {

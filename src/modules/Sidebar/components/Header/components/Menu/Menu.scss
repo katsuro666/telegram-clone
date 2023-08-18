@@ -5,29 +5,33 @@
   width: 70%;
   background: transparent!important; 
   border-radius: 15px!important;
+  
 }
 
 .menu__list {
-  background-color: rgba(33, 33, 33, .75);
+  background-color: var(--surface-color-blur);
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, .15);
   color: #fff;
-
+  transition: all ease 2s!important;
 }
 
 .menu__item {
   &:hover{ 
-    background-color: rgba(255, 255, 255, .1)!important;
+    background-color: var(--surface-color-hover)!important;
   }
 }
 
 .menu__icon {
-  color: #fff;
+  color: var(--primary-text-color);
   font-size: medium!important;
+  width: 24px;
+  height: 24px;
 }
 
 .menu__text * {
   font-size: 16px!important;
+  color: var(--primary-text-color);
 }
 
 .nav-link {
@@ -35,13 +39,9 @@
   text-decoration: none;
 }
 
-.modal__header {
-  margin-bottom: 15px;
-}
-
 .modal__text {
   padding: 8px 0;
-  margin-bottom: 15px;
+  color: var(--primary-text-color)!important;
 }
 
 .modal__btns {
@@ -50,18 +50,23 @@
   align-items: center;
 }
 
+.MuiDialog-paper {
+  background: var(--surface-color)!important;
+  color: var(--primary-text-color)!important;
+}
+
 .cancel-btn {
-  color: #8774e1!important;
+  color: var(--primary-color)!important;
   
   &:hover {
-    background-color: #8674e12b!important;
+    background-color: var(--primary-color-light)!important;
   }
 }
 
 .logout-btn {
-  color: #ff595a!important;
+  color: var(--danger-color)!important;
 
   &:hover {
-    background-color: #ff595928!important;
+    background-color: var(--danger-color-light)!important;
   }
 }
