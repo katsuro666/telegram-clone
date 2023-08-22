@@ -90,6 +90,11 @@ export function Thread({ messageData, selectedUser }) {
     setUnseenMessages([]);
   };
 
+  const today = new Date().toLocaleDateString('en', { month: 'short', day: 'numeric' });
+  const lastMsgShortDate = messageList[0]?.timestamp
+    ?.toDate()
+    .toLocaleDateString('en', { month: 'short', day: 'numeric' });
+
   // !
   // TODO add highlight of the thread you are chatting with
   // !
@@ -112,10 +117,12 @@ export function Thread({ messageData, selectedUser }) {
               )
             ) : null}
             <small className={`thread__date ${isThreadOpen && 'thread__date--open'}`}>
-              {messageList[0]?.timestamp?.toDate().toLocaleString('en-gb', {
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
+              {today === lastMsgShortDate
+                ? messageList[0]?.timestamp?.toDate().toLocaleString('en-gb', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })
+                : lastMsgShortDate}
             </small>
           </div>
         </div>
