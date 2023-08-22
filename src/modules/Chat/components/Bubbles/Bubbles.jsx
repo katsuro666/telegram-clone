@@ -26,14 +26,46 @@ export function Bubbles() {
     }
   }, [threadId]);
 
+  const isPrevDaySame = (array, index) => {
+    if (index === 0) {
+      return true;
+    } else if (
+      array[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' }) ===
+      array[index - 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
-    <div
-      className={
-        messages.length ? 'chat__bubbles --scrollable' : 'chat__bubbles'
-      }>
-      {messages.map(({ id, data }) => (
-        <Message key={id} data={data} />
-      ))}
+    <div className={messages.length ? 'chat__bubbles --scrollable' : 'chat__bubbles'}>
+      {messages.map(({ id, data }, index) => {
+        if (index === messages.length - 1) {
+          return (
+            <React.Fragment key={id}>
+              <Message data={data} />
+              <div className='service-msg'>
+                {messages[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })}
+              </div>
+            </React.Fragment>
+          );
+        } else if (isPrevDaySame(messages, index)) {
+          return <Message key={id} data={data} />;
+        } else {
+          return (
+            <React.Fragment key={id}>
+              <div className='service-msg'>
+                {messages[index - 1]?.data?.timestamp
+                  ?.toDate()
+                  .toLocaleDateString('en', { month: 'long', day: 'numeric' })}
+              </div>
+              <Message data={data} />
+            </React.Fragment>
+          );
+        }
+      })}
     </div>
   );
 }

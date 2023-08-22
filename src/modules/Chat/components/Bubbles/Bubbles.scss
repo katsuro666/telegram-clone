@@ -17,3 +17,19 @@
   width: 0;
   height: 0;
 }
+
+.service-msg {
+  color: #ffffff;
+  background-color: var(--message-highlighting-color);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 3px 15px;
+  line-height: 20px;
+  border-radius: 10px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-word;
+}
