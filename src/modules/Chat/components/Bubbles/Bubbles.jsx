@@ -26,12 +26,12 @@ export function Bubbles() {
     }
   }, [threadId]);
 
-  const isPrevDaySame = (array, index) => {
+  const isPrevMessageHasSameDay = (array, index) => {
     if (index === 0) {
       return true;
     } else if (
       array[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' }) ===
-      array[index - 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
+      array[index + 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
     ) {
       return true;
     } else {
@@ -51,17 +51,17 @@ export function Bubbles() {
               </div>
             </React.Fragment>
           );
-        } else if (isPrevDaySame(messages, index)) {
+        } else if (isPrevMessageHasSameDay(messages, index)) {
           return <Message key={id} data={data} />;
         } else {
           return (
             <React.Fragment key={id}>
+              <Message data={data} />
               <div className='service-msg'>
                 {messages[index - 1]?.data?.timestamp
                   ?.toDate()
                   .toLocaleDateString('en', { month: 'long', day: 'numeric' })}
               </div>
-              <Message data={data} />
             </React.Fragment>
           );
         }

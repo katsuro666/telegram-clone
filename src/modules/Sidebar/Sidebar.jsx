@@ -23,6 +23,7 @@ export function Sidebar() {
   useEffect(() => {
     db.collection('rooms')
       .where('authorizedUsers', 'array-contains', user.uid)
+      .orderBy('lastMessageIn', 'desc')
       .onSnapshot((snapshot) => {
         setThreads(
           snapshot.docs.map((doc) => ({

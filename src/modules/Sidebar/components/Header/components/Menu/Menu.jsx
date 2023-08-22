@@ -1,30 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-// import Paper from '@mui/material/Paper';
-// import MenuList from '@mui/material/MenuList';
-// import MenuItem from '@mui/material/MenuItem';
-// import ListItemText from '@mui/material/ListItemText';
-// import ListItemIcon from '@mui/material/ListItemIcon';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { auth } from '../../../../../../firebase';
-import {
-  Button,
-  Paper,
-  MenuItem,
-  MenuList,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  ListItemText,
-  ListItemIcon,
-} from '@mui/material';
+import { Paper, MenuItem, MenuList, ListItemText, ListItemIcon } from '@mui/material';
 import './Menu.scss';
 import { Theme } from 'components';
 import { useSelector, useDispatch } from 'react-redux';
 import { set } from 'features/themeSlice';
+import { LogOutModal } from './components';
 
 Modal.setAppElement('#root');
 
@@ -40,11 +23,11 @@ export function Menu(props) {
 
   // TODO: сделать чтобы меню закрывалось при нажатии на бургер
 
-  const [showModal, setShowModal] = useState(false);
+  const [isModalShow, setIsModalShow] = useState(false);
 
-  const closeModal = () => setShowModal(false);
+  const closeModal = () => setIsModalShow(false);
 
-  const openModal = () => setShowModal(true);
+  const openModal = () => setIsModalShow(true);
 
   return (
     <div className={props.className} ref={props.innerRef}>
@@ -77,29 +60,7 @@ export function Menu(props) {
         </MenuList>
       </Paper>
 
-      <Dialog
-        open={showModal}
-        onClose={closeModal}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'>
-        <DialogTitle>{'Logout'}</DialogTitle>
-        <DialogContent>
-          <DialogContentText className='modal__text'>
-            Are you sure you want to logout?
-            <br />
-            <br />
-            Note that you can seamlessly use Telegram on all your devices at once.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className='modal__btns'>
-          <Button className='cancel-btn' onClick={closeModal}>
-            Cancel
-          </Button>
-          <Button className='logout-btn' onClick={() => auth.signOut()} autoFocus>
-            Log out
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <LogOutModal isModalShow={isModalShow} closeModal={closeModal} />
     </div>
   );
 }

@@ -23,6 +23,10 @@ export function Input() {
       seen: false,
     });
 
+    db.collection('rooms').doc(threadId).update({
+      lastMessageIn: serverTimestamp(),
+    });
+
     setInput('');
   };
 
