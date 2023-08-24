@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Paper, MenuItem, MenuList, ListItemText, ListItemIcon } from '@mui/material';
 import './Menu.scss';
 import { Theme } from 'components';
 import { useSelector, useDispatch } from 'react-redux';
 import { set } from 'features/themeSlice';
 import { LogOutModal } from './components';
+import { setIsSettingsOpen } from 'features/navSlice';
 
 Modal.setAppElement('#root');
 
@@ -29,10 +31,30 @@ export function Menu(props) {
 
   const openModal = () => setIsModalShow(true);
 
+  const openSettings = () => {
+    dispatch(setIsSettingsOpen(true));
+  };
+
   return (
     <div className={props.className} ref={props.innerRef}>
       <Paper className='menu'>
         <MenuList className='menu__list'>
+          <MenuItem className='menu__item' onClick={openSettings}>
+            <ListItemIcon>
+              <SettingsIcon className='menu__icon' />
+            </ListItemIcon>
+            <ListItemText className='menu__text'>Settings</ListItemText>
+          </MenuItem>
+
+          <MenuItem className='menu__item' onClick={handleChange}>
+            <div style={{ display: 'flex' }}>
+              <ListItemIcon>
+                <Theme className={'menu__icon'} />
+              </ListItemIcon>
+              <ListItemText className='menu__text'>Change theme</ListItemText>
+            </div>
+          </MenuItem>
+
           <MenuItem className='menu__item' onClick={openModal}>
             <ListItemIcon>
               <LogoutIcon className='menu__icon' />
@@ -48,15 +70,6 @@ export function Menu(props) {
               <ListItemText className='menu__text'>Install app</ListItemText>
             </MenuItem>
           </a>
-
-          <MenuItem className='menu__item' onClick={handleChange}>
-            <div style={{ display: 'flex' }}>
-              <ListItemIcon>
-                <Theme className={'menu__icon'} />
-              </ListItemIcon>
-              <ListItemText className='menu__text'>Change theme</ListItemText>
-            </div>
-          </MenuItem>
         </MenuList>
       </Paper>
 

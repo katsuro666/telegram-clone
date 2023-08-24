@@ -9,16 +9,19 @@ import { db } from '../../firebase';
 import { selectUser } from 'features/userSlice';
 import './Sidebar.scss';
 import { UserSearchItem } from './components/UserSearchItem';
+import { selectIsSettingsOpen, selectIsUserSearchOpen } from 'features/navSlice';
 
 export function Sidebar() {
   const user = useSelector(selectUser);
   const [threads, setThreads] = useState([]);
 
-  const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [searchBarValue, setSearchBarValue] = useState('');
 
   const [searchList, setSearchList] = useState([]);
   const [filteredSearchList, setFilteredSearchList] = useState([]);
+
+  const isUserSearchOpen = useSelector(selectIsUserSearchOpen);
+  const isSettingsOpen = useSelector(selectIsSettingsOpen);
 
   useEffect(() => {
     db.collection('rooms')
@@ -27,9 +30,7 @@ export function Sidebar() {
       .onSnapshot((snapshot) => {
         setThreads(
           snapshot.docs.map((doc) => ({
-            chatWith: doc
-              .data()
-              .authorizedUsers.find((uid) => uid !== user.uid),
+            chatWith: doc.data().authorizedUsers.find((uid) => uid !== user.uid),
             data: doc.data(),
           }))
         );
@@ -50,9 +51,7 @@ export function Sidebar() {
 
   useEffect(() => {
     setFilteredSearchList(
-      searchList.filter((user) =>
-        user.displayName.toLowerCase().includes(searchBarValue.toLowerCase())
-      )
+      searchList.filter((user) => user.displayName.toLowerCase().includes(searchBarValue.toLowerCase()))
     );
   }, [searchBarValue, searchList]);
 
@@ -69,42 +68,33 @@ export function Sidebar() {
 
   return (
     <div className='sidebar'>
-      <Header
-        searchIsOpen={searchIsOpen}
-        setSearchIsOpen={setSearchIsOpen}
-        searchBarValue={searchBarValue}
-        setSearchBarValue={setSearchBarValue}
-      />
-      {searchIsOpen ? (
+      <Header searchBarValue={searchBarValue} setSearchBarValue={setSearchBarValue} />
+
+      {isUserSearchOpen && (
         <Threads>
           {filteredSearchList.map(
-            (item) =>
-              item.uid !== user.uid && (
-                <UserSearchItem
-                  key={item.uid}
-                  selectedUser={item}
-                  setSearchIsOpen={setSearchIsOpen}
-                />
-              )
+            (item) => item.uid !== user.uid && <UserSearchItem key={item.uid} selectedUser={item} />
           )}
         </Threads>
-      ) : (
-        <Threads>
-          {threads.map((item) => (
-            <Thread
-              key={item.data.uniqueId}
-              selectedUser={searchList.find(
-                (user) => user.uid === item.chatWith
-              )}
-              messageData={item.data}
-            />
-          ))}
-        </Threads>
       )}
-      {!searchIsOpen && (
-        <IconButton className='sidebar__new-msg' onClick={addThread}>
-          <CreateIcon className='new-msg__icon' />
-        </IconButton>
+
+      {isSettingsOpen && <div style={{ background: 'red' }}>settings</div>}
+
+      {!isUserSearchOpen && !isSettingsOpen && (
+        <>
+          <Threads>
+            {threads.map((item) => (
+              <Thread
+                key={item.data.uniqueId}
+                selectedUser={searchList.find((user) => user.uid === item.chatWith)}
+                messageData={item.data}
+              />
+            ))}
+          </Threads>
+          <IconButton className='sidebar__new-msg' onClick={addThread}>
+            <CreateIcon className='new-msg__icon' />
+          </IconButton>
+        </>
       )}
     </div>
   );

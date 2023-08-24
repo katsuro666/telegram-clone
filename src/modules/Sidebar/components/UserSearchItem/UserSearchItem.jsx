@@ -6,10 +6,15 @@ import './UserSearchItem.scss';
 import { selectUser } from 'features/userSlice';
 import { db } from '../../../../firebase';
 import { collection, getDocs, or, query, where } from 'firebase/firestore';
+import { setIsUserSearchOpen } from 'features/navSlice';
 
-export function UserSearchItem({ selectedUser, setSearchIsOpen }) {
+export function UserSearchItem({ selectedUser }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
+  const closeSearch = () => {
+    dispatch(setIsUserSearchOpen(false));
+  };
 
   const setNewThread = async () => {
     let roomId = '';
@@ -18,10 +23,7 @@ export function UserSearchItem({ selectedUser, setSearchIsOpen }) {
 
     const q = query(
       roomsRef,
-      or(
-        where('uniqueId', '==', user.uid + selectedUser.uid),
-        where('uniqueId', '==', selectedUser.uid + user.uid)
-      )
+      or(where('uniqueId', '==', user.uid + selectedUser.uid), where('uniqueId', '==', selectedUser.uid + user.uid))
     );
 
     const isRoomCreated = await getDocs(q)
@@ -59,7 +61,8 @@ export function UserSearchItem({ selectedUser, setSearchIsOpen }) {
         authorizedUsers: [user.uid, selectedUser.uid],
       })
     );
-    setSearchIsOpen(false);
+
+    closeSearch();
   };
 
   return (
