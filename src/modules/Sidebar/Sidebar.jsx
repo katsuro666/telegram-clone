@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
-import { Header } from './components';
+import { Header, Settings } from './components';
 import { Threads } from './components/Threads';
 import { Thread } from './components/Threads/components';
 import { db } from '../../firebase';
@@ -78,7 +78,7 @@ export function Sidebar() {
         </Threads>
       )}
 
-      {isSettingsOpen && <div style={{ background: 'red' }}>settings</div>}
+      {isSettingsOpen && <Settings />}
 
       {!isUserSearchOpen && !isSettingsOpen && (
         <>
