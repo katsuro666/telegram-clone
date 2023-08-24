@@ -15,12 +15,16 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
+        const atSignPosition = authUser.email.indexOf('@');
+        const username = authUser.email.slice(0, atSignPosition);
+
         dispatch(
           login({
             uid: authUser.uid,
             photo: authUser.photoURL,
             email: authUser.email,
             displayName: authUser.displayName,
+            username: username,
           })
         );
 
@@ -29,6 +33,7 @@ function App() {
           photo: authUser.photoURL,
           email: authUser.email,
           displayName: authUser.displayName,
+          username: username,
         });
       } else {
         dispatch(logout());

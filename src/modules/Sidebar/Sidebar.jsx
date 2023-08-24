@@ -51,7 +51,11 @@ export function Sidebar() {
 
   useEffect(() => {
     setFilteredSearchList(
-      searchList.filter((user) => user.displayName.toLowerCase().includes(searchBarValue.toLowerCase()))
+      searchList.filter(
+        (user) =>
+          user.displayName.toLowerCase().includes(searchBarValue.toLowerCase()) ||
+          user.username.includes(searchBarValue.toLowerCase())
+      )
     );
   }, [searchBarValue, searchList]);
 

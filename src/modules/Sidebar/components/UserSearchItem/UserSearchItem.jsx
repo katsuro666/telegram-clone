@@ -70,7 +70,7 @@ export function UserSearchItem({ selectedUser }) {
       <Avatar src={selectedUser.photo} />
       <div className='search-item__info'>
         <span className='search-item__name'>{selectedUser.displayName}</span>
-        <span className='search-item__shortname'>{`@${selectedUser.displayName.toLowerCase()}`}</span>
+        <span className='search-item__shortname'>{`@${selectedUser.username}`}</span>
       </div>
     </li>
   );
