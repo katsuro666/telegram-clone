@@ -35,7 +35,7 @@ export function Sidebar() {
           }))
         );
       });
-  });
+  }, [user.uid]);
 
   useEffect(() => {
     const fetchData = async () => {

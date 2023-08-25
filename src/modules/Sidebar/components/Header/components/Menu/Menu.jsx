@@ -13,7 +13,7 @@ import { setIsSettingsOpen } from 'features/navSlice';
 
 Modal.setAppElement('#root');
 
-export function Menu(props) {
+ function MenuProto(props) {
   // @ts-ignore
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -77,3 +77,5 @@ export function Menu(props) {
     </div>
   );
 }
+
+export const Menu = React.memo(MenuProto);

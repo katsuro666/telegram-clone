@@ -5,7 +5,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import './Thread.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { db, realtimeDb } from '../../../../../../firebase';
-import { selectThreadName, setThread } from 'features/threadSlice';
+import { setThread } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
 import { ref, onValue } from 'firebase/database';
 
