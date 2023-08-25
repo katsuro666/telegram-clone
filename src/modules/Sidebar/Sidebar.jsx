@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
-import { Header, Settings } from './components';
-import { Threads } from './components/Threads';
+import { EditProfile, Header, Settings, Threads } from './components';
 import { Thread } from './components/Threads/components';
 import { db } from '../../firebase';
 import { selectUser } from 'features/userSlice';
 import './Sidebar.scss';
 import { UserSearchItem } from './components/UserSearchItem';
-import { selectIsSettingsOpen, selectIsUserSearchOpen } from 'features/navSlice';
+import { selectIsEditProfileOpen, selectIsSettingsOpen, selectIsUserSearchOpen } from 'features/navSlice';
 
 export function Sidebar() {
   const user = useSelector(selectUser);
@@ -22,6 +21,7 @@ export function Sidebar() {
 
   const isUserSearchOpen = useSelector(selectIsUserSearchOpen);
   const isSettingsOpen = useSelector(selectIsSettingsOpen);
+  const isEditProfileOpen = useSelector(selectIsEditProfileOpen);
 
   useEffect(() => {
     db.collection('rooms')
@@ -62,12 +62,6 @@ export function Sidebar() {
   const addThread = async () => {
     alert('temporarily removed method');
     // ! temporarily removed method
-    // const threadName = prompt('Enter a thread name');
-    // if (threadName) {
-    //   db.collection('users').doc(user.uid).collection('threads').add({
-    //     threadName: threadName
-    //   })
-    // }
   };
 
   return (
@@ -84,7 +78,9 @@ export function Sidebar() {
 
       {isSettingsOpen && <Settings />}
 
-      {!isUserSearchOpen && !isSettingsOpen && (
+      {isEditProfileOpen && <EditProfile />}
+
+      {!isUserSearchOpen && !isSettingsOpen && !isEditProfileOpen && (
         <>
           <Threads>
             {threads.map((item) => (
