@@ -4,10 +4,29 @@ import { useSelector } from 'react-redux';
 import { db } from '../../../../firebase';
 import { Message } from '../Message';
 import './Bubbles.scss';
+import { Menu, MenuItem } from '@mui/material';
 
 export function Bubbles() {
   const [messages, setMessages] = useState([]);
   const threadId = useSelector(selectThreadId);
+
+  const [contextMenu, setContextMenu] = useState(null);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX + 2,
+            mouseY: event.clientY - 6,
+          }
+        : null
+    );
+  };
+
+  const handleClose = () => {
+    setContextMenu(null);
+  };
 
   useEffect(() => {
     if (threadId) {
@@ -40,7 +59,7 @@ export function Bubbles() {
   };
 
   return (
-    <div className={messages.length ? 'chat__bubbles --scrollable' : 'chat__bubbles'}>
+    <div className={messages.length ? 'chat__bubbles --scrollable' : 'chat__bubbles'} onContextMenu={handleContextMenu}>
       {messages.map(({ id, data }, index) => {
         if (index === messages.length - 1) {
           return (
@@ -66,6 +85,22 @@ export function Bubbles() {
           );
         }
       })}
+
+      {/* <Menu
+        open={contextMenu !== null}
+        onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          contextMenu !== null
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        <MenuItem onClick={handleClose}>Copy</MenuItem>
+        <MenuItem onClick={handleClose}>Print</MenuItem>
+        <MenuItem onClick={handleClose}>Highlight</MenuItem>
+        <MenuItem onClick={handleClose}>Email</MenuItem>
+      </Menu> */}
     </div>
   );
 }
