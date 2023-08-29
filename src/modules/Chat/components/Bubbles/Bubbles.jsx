@@ -45,12 +45,12 @@ export function Bubbles() {
     }
   }, [threadId]);
 
-  const isPrevMessageHasSameDay = (array, index) => {
-    if (index === 0) {
+  const shouldRenderServiceMsg = (messagesArray, index) => {
+    if ((index === 0 && messagesArray.length <= 1) || index === messagesArray.length - 1) {
       return true;
     } else if (
-      array[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' }) ===
-      array[index + 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
+      messagesArray[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' }) ===
+      messagesArray[index + 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
     ) {
       return true;
     } else {
@@ -70,14 +70,14 @@ export function Bubbles() {
               </div>
             </React.Fragment>
           );
-        } else if (isPrevMessageHasSameDay(messages, index)) {
+        } else if (shouldRenderServiceMsg(messages, index)) {
           return <Message key={id} data={data} />;
         } else {
           return (
             <React.Fragment key={id}>
               <Message data={data} />
               <div className='service-msg'>
-                {messages[index - 1]?.data?.timestamp
+                {messages[index - 1 && index]?.data?.timestamp
                   ?.toDate()
                   .toLocaleDateString('en', { month: 'long', day: 'numeric' })}
               </div>
