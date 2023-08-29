@@ -15,30 +15,49 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        const atSignPosition = authUser.email.indexOf('@');
-        const username = authUser.email.slice(0, atSignPosition);
+        db.collection('users')
+          .doc(authUser.uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              dispatch(
+                login({
+                  uid: doc.data().uid,
+                  photo: doc.data().photo,
+                  email: doc.data().email,
+                  displayName: doc.data().displayName,
+                  username: doc.data().username,
+                })
+              );
+              setIsUserLoaded(true);
+            } else {
+              const atSignPosition = authUser.email.indexOf('@');
+              const username = authUser.email.slice(0, atSignPosition);
 
-        dispatch(
-          login({
-            uid: authUser.uid,
-            photo: authUser.photoURL,
-            email: authUser.email,
-            displayName: authUser.displayName,
-            username: username,
-          })
-        );
+              db.collection('users').doc(authUser.uid).set({
+                uid: authUser.uid,
+                photo: authUser.photoURL,
+                email: authUser.email,
+                displayName: authUser.displayName,
+                username: username,
+              });
 
-        db.collection('users').doc(authUser.uid).set({
-          uid: authUser.uid,
-          photo: authUser.photoURL,
-          email: authUser.email,
-          displayName: authUser.displayName,
-          username: username,
-        });
+              dispatch(
+                login({
+                  uid: authUser.uid,
+                  photo: authUser.photoURL,
+                  email: authUser.email,
+                  displayName: authUser.displayName,
+                  username: username,
+                })
+              );
+              setIsUserLoaded(true);
+            }
+          });
       } else {
         dispatch(logout());
+        setIsUserLoaded(true);
       }
-      setIsUserLoaded(true);
     });
 
     return () => unsubscribe();

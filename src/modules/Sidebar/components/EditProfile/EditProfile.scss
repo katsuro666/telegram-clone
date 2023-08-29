@@ -55,3 +55,25 @@
   margin-bottom: 10px;
   }
 }
+
+.settings__accept-btn {
+  position: fixed!important;
+  bottom: 2%;
+  left: 26%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--primary-color)!important;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--primary-color-hover)!important;
+  }
+}
+
+.settings__accept-icon {
+  color: var(--button-new-message-color);
+}

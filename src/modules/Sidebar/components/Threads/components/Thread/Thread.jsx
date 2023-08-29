@@ -102,12 +102,12 @@ export function Thread({ messageData, selectedUser }) {
   return (
     <li className={`thread ${isThreadOpen && 'thread--open'}`} onClick={openThread}>
       <div className={`thread__avatar`}>
-        <Avatar src={selectedUser.photo} />
+        <Avatar src={selectedUser?.photo} />
         <span className={userStatus === 'online' ? 'thread__avatar--online' : ''}></span>
       </div>
       <div className='thread__info'>
         <div className='thread__top-row'>
-          <span className='thread__name'>{selectedUser.displayName}</span>
+          <span className='thread__name'>{selectedUser?.displayName}</span>
           <div className='thread__indicators'>
             {messageList[0]?.uid === user.uid ? (
               messageList[0]?.seen ? (

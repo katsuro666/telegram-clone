@@ -38,7 +38,7 @@
 .user-settings {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: var(--surface-color)!important;
   box-shadow: none!important
 }

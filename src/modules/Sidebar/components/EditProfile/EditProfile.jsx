@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { TextField } from '@mui/material';
+import { IconButton, TextField } from '@mui/material';
 import './EditProfile.scss';
-import { login, selectUser } from 'features/userSlice';
-import { useSelector } from 'react-redux';
+import { selectUser, setNewFields } from 'features/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../.././../firebase';
 import { useFormik } from 'formik';
 import { userSettingsSchema } from 'app/validations/userSettings';
+import DoneIcon from '@mui/icons-material/Done';
+import { setIsEditProfileOpen, setIsSettingsOpen } from 'features/navSlice';
 
 export function EditProfile() {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [usersList, setUsersList] = useState([]);
 
@@ -30,7 +33,7 @@ export function EditProfile() {
     validationSchema: userSettingsSchema,
     onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
 
   const handleUserDisplayNameChange = (value) => {
@@ -52,6 +55,16 @@ export function EditProfile() {
     }
   };
 
+  const changeUserSettings = () => {
+    db.collection('users').doc(user.uid).update({
+      displayName: values.displayName,
+      username: values.username,
+    })
+    dispatch(setNewFields(values));
+    dispatch(setIsEditProfileOpen(false));
+    dispatch(setIsSettingsOpen(true));
+  };
+
   return (
     <div>
       <div className='edit-profile__fields'>
@@ -60,6 +73,7 @@ export function EditProfile() {
           label='Name'
           variant='outlined'
           size='small'
+          autoComplete='off'
           value={values.displayName}
           onChange={(e) => handleUserDisplayNameChange(e.target.value)}
         />
@@ -68,6 +82,7 @@ export function EditProfile() {
           label='Username'
           variant='outlined'
           size='small'
+          autoComplete='off'
           value={values.username}
           onChange={(e) => handleUsernameChange(e.target.value)}
         />
@@ -87,6 +102,13 @@ export function EditProfile() {
           <br />
           You can use <b>a-z</b>, <b>0-9</b> and underscores. Minimum length is <b>5</b> characters.
         </span>
+
+        {((isUsernameFree && !errors.username) ||
+          (values.username === user.username && values.displayName !== user.displayName)) && (
+          <IconButton className='settings__accept-btn' onClick={changeUserSettings}>
+            <DoneIcon className='settings__accept-icon' />
+          </IconButton>
+        )}
       </div>
     </div>
   );
