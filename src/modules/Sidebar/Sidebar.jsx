@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
-import { EditProfile, Header, Settings, Threads } from './components';
+import { EditProfile, Header, SelectLanguage, Settings, Threads } from './components';
 import { Thread } from './components/Threads/components';
 import { db } from '../../firebase';
 import { selectUser } from 'features/userSlice';
 import './Sidebar.scss';
 import { UserSearchItem } from './components/UserSearchItem';
-import { selectIsEditProfileOpen, selectIsSettingsOpen, selectIsUserSearchOpen } from 'features/navSlice';
+import {
+  selectIsEditProfileOpen,
+  selectIsSelectLanguageOpen,
+  selectIsSettingsOpen,
+  selectIsUserSearchOpen,
+} from 'features/navSlice';
 
 export function Sidebar() {
   const user = useSelector(selectUser);
@@ -22,6 +27,7 @@ export function Sidebar() {
   const isUserSearchOpen = useSelector(selectIsUserSearchOpen);
   const isSettingsOpen = useSelector(selectIsSettingsOpen);
   const isEditProfileOpen = useSelector(selectIsEditProfileOpen);
+  const isSelectLanguageOpen = useSelector(selectIsSelectLanguageOpen);
 
   useEffect(() => {
     db.collection('rooms')
@@ -80,7 +86,9 @@ export function Sidebar() {
 
       {isEditProfileOpen && <EditProfile />}
 
-      {!isUserSearchOpen && !isSettingsOpen && !isEditProfileOpen && (
+      {isSelectLanguageOpen && <SelectLanguage />}
+
+      {!isUserSearchOpen && !isSettingsOpen && !isEditProfileOpen && !isSelectLanguageOpen && (
         <>
           <Threads>
             {threads.map((item) => (

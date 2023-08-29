@@ -6,6 +6,7 @@ export const navSlice = createSlice({
     isSettingsOpen: false,
     isUserSearchOpen: false,
     isEditProfileOpen: false,
+    isSelectLanguageOpen: false,
   },
   reducers: {
     setIsSettingsOpen: (state, action) => {
@@ -17,13 +18,17 @@ export const navSlice = createSlice({
     setIsEditProfileOpen: (state, action) => {
       state.isEditProfileOpen = action.payload;
     },
+    setIsSelectLanguageOpen: (state, action) => {
+      state.isSelectLanguageOpen = action.payload;
+    }
   },
 });
 
-export const { setIsSettingsOpen, setIsUserSearchOpen, setIsEditProfileOpen } = navSlice.actions;
+export const { setIsSettingsOpen, setIsUserSearchOpen, setIsEditProfileOpen, setIsSelectLanguageOpen } = navSlice.actions;
 
 export const selectIsSettingsOpen = (state) => state.nav.isSettingsOpen;
 export const selectIsUserSearchOpen = (state) => state.nav.isUserSearchOpen;
 export const selectIsEditProfileOpen = (state) => state.nav.isEditProfileOpen;
+export const selectIsSelectLanguageOpen = (state) => state.nav.isSelectLanguageOpen;
 
 export default navSlice.reducer;

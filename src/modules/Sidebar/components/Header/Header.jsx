@@ -12,6 +12,8 @@ import {
   setIsSettingsOpen,
   selectIsEditProfileOpen,
   setIsEditProfileOpen,
+  setIsSelectLanguageOpen,
+  selectIsSelectLanguageOpen,
 } from 'features/navSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,7 +24,7 @@ export function Header({ searchBarValue, setSearchBarValue }) {
   const isUserSearchOpen = useSelector(selectIsUserSearchOpen);
   const isSettingsOpen = useSelector(selectIsSettingsOpen);
   const isEditProfileOpen = useSelector(selectIsEditProfileOpen);
-
+  const isSelectLanguageOpen = useSelector(selectIsSelectLanguageOpen);
   const handleSearch = (state) => {
     dispatch(setIsUserSearchOpen(state));
   };
@@ -38,19 +40,23 @@ export function Header({ searchBarValue, setSearchBarValue }) {
       dispatch(setIsEditProfileOpen(false));
       dispatch(setIsSettingsOpen(true));
     }
+    if (isSelectLanguageOpen) {
+      dispatch(setIsSelectLanguageOpen(false));
+      dispatch(setIsSettingsOpen(true));
+    }
   };
 
   return (
     <div className='sidebar__header'>
       <div className='header__burger'>
-        {isUserSearchOpen || isSettingsOpen || isEditProfileOpen ? (
+        {isUserSearchOpen || isSettingsOpen || isEditProfileOpen || isSelectLanguageOpen ? (
           <ArrowBackIcon className='arrow-back__btn' onClick={backArrowAction} />
         ) : (
           <MenuIcon className='burger__btn' onClick={() => setIsShow(!isShow)} />
         )}
       </div>
 
-      {!isSettingsOpen && !isEditProfileOpen && (
+      {!isSettingsOpen && !isEditProfileOpen && !isSelectLanguageOpen && (
         <div className='header__search'>
           <SearchIcon className='header__searchIcon' />
           <input

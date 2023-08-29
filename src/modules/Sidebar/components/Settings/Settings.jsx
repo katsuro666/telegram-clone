@@ -5,7 +5,7 @@ import './Settings.scss';
 import { Paper, MenuList, MenuItem, ListItemIcon, Skeleton } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import PersonIcon from '@mui/icons-material/Person';
-import { setIsEditProfileOpen, setIsSettingsOpen } from 'features/navSlice';
+import { setIsEditProfileOpen, setIsSettingsOpen, setIsSelectLanguageOpen } from 'features/navSlice';
 
 export function Settings() {
   const user = useSelector(selectUser);
@@ -17,6 +17,11 @@ export function Settings() {
     dispatch(setIsSettingsOpen(false));
     dispatch(setIsEditProfileOpen(true));
   };
+
+  const openSelectLanguage = () => {
+    dispatch(setIsSettingsOpen(false));
+    dispatch(setIsSelectLanguageOpen(true));
+  }
 
   return (
     <>
@@ -46,7 +51,7 @@ export function Settings() {
             </div>
           </MenuItem>
 
-          <MenuItem className='user-settings__item'>
+          <MenuItem className='user-settings__item' onClick={openSelectLanguage}>
             <ListItemIcon>
               <TranslateIcon className='user-settings__icon' />
             </ListItemIcon>
