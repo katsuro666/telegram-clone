@@ -1,0 +1,24 @@
+{
+  "Sign in with Google": "Sign in with Google",
+
+  "Search": "Search",
+  "Settings": "Settings",
+  "Change theme": "Change theme",
+  "Install app": "Install app",
+  "Log out": "Log out",
+
+  "Logout": "Logout",
+  "Are you sure you want to logout?": "Are you sure you want to logout?",
+  "Note that you can seamlessly use Telegram on all your devices at once.": "Note that you can seamlessly use Telegram on all your devices at once.",
+  "Cancel": "Cancel",
+
+  "Edit profile": "Edit profile",
+  "Name": "Name",
+  "Username": "Username",
+  "You can choose a username on Telegram. If you do, people will be able to find you by this username.": "You can choose a username on Telegram. If you do, people will be able to find you by this username.",
+  "You can use a-z, 0-9 and underscores. Minimum length is 5 characters.": "You can use a-z, 0-9 and underscores. Minimum length is 5 characters.",
+  "Language": "Language",
+
+  "Message": "Message",
+  "Last seen": "last seen"
+}

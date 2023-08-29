@@ -6,11 +6,27 @@ import { login, logout, selectUser } from 'features/userSlice';
 import { auth, db } from './firebase';
 import CircularProgress from '@mui/material/CircularProgress';
 import './App.scss';
+import { useTranslation } from 'react-i18next';
+import { useLocalStorage } from 'app/hooks/useLocalStorage';
+import i18next from 'i18next';
 
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const [isUserLoaded, setIsUserLoaded] = useState(false);
+
+  // const {t} = useTranslation();
+  // const [language, setLanguage] = useLocalStorage('language', 'ru')
+
+  // const handleLanguageChange = () => {
+  //   if (language === 'en') {
+  //     i18next.changeLanguage('ru')
+  //     setLanguage('ru')
+  //   } else {
+  //     i18next.changeLanguage('en')
+  //     setLanguage('en')
+  //   }
+  // }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {

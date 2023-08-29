@@ -1,0 +1,24 @@
+{
+  "Sign in with Google": "Войти с помощью Google",
+
+  "Search": "Поиск",
+  "Settings": "Настройки",
+  "Change theme": "Изменить тему",
+  "Install app": "Установить приложение",
+  "Log out": "Выйти",
+
+  "Logout": "Выйти",
+  "Are you sure you want to logout?": "Вы действительно хотите выйти?",
+  "Note that you can seamlessly use Telegram on all your devices at once.": "Обратите внимание, что вы можете легко использовать Telegram на всех своих устройствах одновременно.",
+  "Cancel": "Отменить",
+
+  "Edit profile": "Редактировать профиль",
+  "Name": "Имя",
+  "Username": "Имя пользователя",
+  "You can choose a username on Telegram. If you do, people will be able to find you by this username.": "Вы можете выбрать имя пользователя в Telegram. Если вы это сделаете, люди смогут найти вас по этому имени пользователя.",
+  "You can use a-z, 0-9 and underscores. Minimum length is 5 characters.": "Можно использовать буквы a-z, цифры 0–9 и символы подчеркивания. Минимальная длина — 5 символов.",
+  "Language": "Язык",
+
+  "Message": "Текст сообщения",
+  "Last seen": "был(-а) в сети"
+}
