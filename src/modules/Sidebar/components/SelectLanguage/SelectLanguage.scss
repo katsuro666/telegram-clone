@@ -1,0 +1,42 @@
+.language__radio-label {
+  width: 100%!important;
+}
+
+.language__item {
+  &:hover {
+    background-color: var(--surface-color-hover)!important;
+  }
+}
+
+.language__radio-text {
+  & > span {
+    color: var(--primary-text-color);
+    font-size: 18px;
+  }
+
+  & > p {
+    color: var(--secondary-text-color);
+    font-size: 14px;
+  }
+}
+
+
+.language__radio {
+  & > span > :first-child {
+  fill: var(--secondary-text-color);
+  }
+
+  & > span > :last-child {
+    fill: var(--primary-color);
+  }
+}
+
+.language__radio--selected {
+  & > span > :first-child {
+    fill: var(--primary-color);
+    }
+  
+    & > span > :last-child {
+      fill: var(--primary-color);
+    }
+}

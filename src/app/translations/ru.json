@@ -7,10 +7,10 @@
   "Install app": "Установить приложение",
   "Log out": "Выйти",
 
-  "Logout": "Выйти",
+  "Logout": "Выход",
   "Are you sure you want to logout?": "Вы действительно хотите выйти?",
-  "Note that you can seamlessly use Telegram on all your devices at once.": "Обратите внимание, что вы можете легко использовать Telegram на всех своих устройствах одновременно.",
-  "Cancel": "Отменить",
+  "Note that you can seamlessly use Telegram on all your devices at once.": "Вы можете легко использовать Telegram на всех своих устройствах одновременно.",
+  "Cancel": "Отмена",
 
   "Edit profile": "Редактировать профиль",
   "Name": "Имя",
@@ -20,5 +20,5 @@
   "Language": "Язык",
 
   "Message": "Текст сообщения",
-  "Last seen": "был(-а) в сети"
+  "last seen": "был(-а) в сети"
 }

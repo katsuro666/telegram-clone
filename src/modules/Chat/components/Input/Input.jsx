@@ -9,11 +9,13 @@ import { serverTimestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { selectThreadId } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
+import { useTranslation } from 'react-i18next';
 
 export function Input() {
   const [input, setInput] = useState('');
   const threadId = useSelector(selectThreadId);
   const user = useSelector(selectUser);
+  const { t } = useTranslation();
 
   const sendMessage = async () => {
     db.collection('rooms').doc(threadId).collection('messages').add({
@@ -43,7 +45,7 @@ export function Input() {
           </IconButton>
           <input
             className='chat__input'
-            placeholder='Message'
+            placeholder={t('Message')}
             type='text'
             value={input}
             onChange={(e) => setInput(e.target.value)}

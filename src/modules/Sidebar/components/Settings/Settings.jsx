@@ -6,10 +6,13 @@ import { Paper, MenuList, MenuItem, ListItemIcon, Skeleton } from '@mui/material
 import TranslateIcon from '@mui/icons-material/Translate';
 import PersonIcon from '@mui/icons-material/Person';
 import { setIsEditProfileOpen, setIsSettingsOpen, setIsSelectLanguageOpen } from 'features/navSlice';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../../i18n';
 
 export function Settings() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +24,15 @@ export function Settings() {
   const openSelectLanguage = () => {
     dispatch(setIsSettingsOpen(false));
     dispatch(setIsSelectLanguageOpen(true));
-  }
+  };
+
+  const showLanguage = () => {
+    if (i18n.language === 'en') {
+      return 'English'
+    } else if (i18n.language === 'ru') {
+      return 'Русский'
+    }
+  };
 
   return (
     <>
@@ -47,7 +58,7 @@ export function Settings() {
               <PersonIcon className='user-settings__icon' />
             </ListItemIcon>
             <div className='user-settings__text-item'>
-              <span className='user-settings__text'>Edit profile</span>
+              <span className='user-settings__text'>{t('Edit profile')}</span>
             </div>
           </MenuItem>
 
@@ -56,8 +67,8 @@ export function Settings() {
               <TranslateIcon className='user-settings__icon' />
             </ListItemIcon>
             <div className='user-settings__text-item'>
-              <span className='user-settings__text'>Language</span>
-              <span className='user-settings__text--secondary'>English</span>
+              <span className='user-settings__text'>{t('Language')}</span>
+              <span className='user-settings__text--secondary'>{showLanguage()}</span>
             </div>
           </MenuItem>
         </MenuList>

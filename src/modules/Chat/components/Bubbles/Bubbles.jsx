@@ -5,10 +5,13 @@ import { db } from '../../../../firebase';
 import { Message } from '../Message';
 import './Bubbles.scss';
 import { Menu, MenuItem } from '@mui/material';
+import i18n from '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export function Bubbles() {
   const [messages, setMessages] = useState([]);
   const threadId = useSelector(selectThreadId);
+  const { t } = useTranslation();
 
   const [contextMenu, setContextMenu] = useState(null);
 
@@ -49,8 +52,12 @@ export function Bubbles() {
     if ((index === 0 && messagesArray.length <= 1) || index === messagesArray.length - 1) {
       return true;
     } else if (
-      messagesArray[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' }) ===
-      messagesArray[index + 1]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })
+      messagesArray[index]?.data?.timestamp
+        ?.toDate()
+        .toLocaleDateString(i18n.language, { month: 'long', day: 'numeric' }) ===
+      messagesArray[index + 1]?.data?.timestamp
+        ?.toDate()
+        .toLocaleDateString(i18n.language, { month: 'long', day: 'numeric' })
     ) {
       return true;
     } else {
@@ -66,7 +73,11 @@ export function Bubbles() {
             <React.Fragment key={id}>
               <Message data={data} />
               <div className='service-msg'>
-                {messages[index]?.data?.timestamp?.toDate().toLocaleDateString('en', { month: 'long', day: 'numeric' })}
+                {t(
+                  `${messages[index]?.data?.timestamp
+                    ?.toDate()
+                    .toLocaleDateString(i18n.language, { month: 'long', day: 'numeric' })}`
+                )}
               </div>
             </React.Fragment>
           );
@@ -77,9 +88,11 @@ export function Bubbles() {
             <React.Fragment key={id}>
               <Message data={data} />
               <div className='service-msg'>
-                {messages[index - 1 && index]?.data?.timestamp
-                  ?.toDate()
-                  .toLocaleDateString('en', { month: 'long', day: 'numeric' })}
+                {t(
+                  `${messages[index - 1 && index]?.data?.timestamp
+                    ?.toDate()
+                    .toLocaleDateString(i18n.language, { month: 'long', day: 'numeric' })}`
+                )}
               </div>
             </React.Fragment>
           );

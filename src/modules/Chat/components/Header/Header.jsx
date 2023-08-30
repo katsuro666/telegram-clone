@@ -6,19 +6,23 @@ import { Avatar, IconButton } from '@mui/material';
 import './Header.scss';
 import { selectThreadId, selectThreadName } from 'features/threadSlice';
 import { useSelector } from 'react-redux';
-import { selectUser } from 'features/userSlice';
 import { db, realtimeDb } from '../../../../firebase';
 import { child, get, onValue, ref } from 'firebase/database';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../../i18n';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/en';
 
-dayjs.extend(relativeTime);
 
 export function Header() {
+  dayjs.locale(i18n.language)
+  dayjs.extend(relativeTime);
+  
   const threadId = useSelector(selectThreadId);
   const threadName = useSelector(selectThreadName);
-  const user = useSelector(selectUser);
-  const [threadInfo, setThreadInfo] = useState([]);
+  const { t } = useTranslation();
 
   const [interlocutorList, setInterlocutorList] = useState([]);
   const [interlocutorStatus, setInterlocutorStatus] = useState(null);
@@ -66,7 +70,7 @@ export function Header() {
 
   useEffect(() => {
     const updateLastSeen = () => {
-      setLastSeenText(`last seen ${dayjs(new Date(interlocutorLastOnline).toString()).fromNow()}`);
+      setLastSeenText(`${t('last seen')} ${t(dayjs(new Date(interlocutorLastOnline).toString()).fromNow())}`);
     };
 
     if (interlocutorLastOnline === null) {
@@ -78,7 +82,7 @@ export function Header() {
       }, 60000);
     }
     return () => clearInterval(interval);
-  }, [interlocutorLastOnline, lastSeenText]);
+  }, [interlocutorLastOnline, lastSeenText, t]);
 
   return (
     <div className='chat__header'>

@@ -10,13 +10,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { set } from 'features/themeSlice';
 import { LogOutModal } from './components';
 import { setIsSettingsOpen } from 'features/navSlice';
+import { useTranslation } from 'react-i18next';
 
 Modal.setAppElement('#root');
 
- function MenuProto(props) {
+function MenuProto(props) {
   // @ts-ignore
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleChange = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -43,7 +45,7 @@ Modal.setAppElement('#root');
             <ListItemIcon>
               <SettingsIcon className='menu__icon' />
             </ListItemIcon>
-            <ListItemText className='menu__text'>Settings</ListItemText>
+            <ListItemText className='menu__text'>{t('Settings')}</ListItemText>
           </MenuItem>
 
           <MenuItem className='menu__item' onClick={handleChange}>
@@ -51,7 +53,7 @@ Modal.setAppElement('#root');
               <ListItemIcon>
                 <Theme className={'menu__icon'} />
               </ListItemIcon>
-              <ListItemText className='menu__text'>Change theme</ListItemText>
+              <ListItemText className='menu__text'>{t('Change theme')}</ListItemText>
             </div>
           </MenuItem>
 
@@ -59,7 +61,7 @@ Modal.setAppElement('#root');
             <ListItemIcon>
               <LogoutIcon className='menu__icon' />
             </ListItemIcon>
-            <ListItemText className='menu__text'>Log out</ListItemText>
+            <ListItemText className='menu__text'>{t('Log out')}</ListItemText>
           </MenuItem>
 
           <a href='https://desktop.telegram.org/' className='nav-link' target='_blank' rel='noreferrer'>
@@ -67,7 +69,7 @@ Modal.setAppElement('#root');
               <ListItemIcon>
                 <AddCircleOutlineIcon className='menu__icon' />
               </ListItemIcon>
-              <ListItemText className='menu__text'>Install app</ListItemText>
+              <ListItemText className='menu__text'>{t('Install app')}</ListItemText>
             </MenuItem>
           </a>
         </MenuList>

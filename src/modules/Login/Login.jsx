@@ -5,8 +5,11 @@ import './Login.scss';
 import { signInWithRedirect } from 'firebase/auth';
 import logo from './assets/logo.png';
 import googleLetter from './assets/G-logo.png';
+import { useTranslation } from 'react-i18next';
 
 export function Login() {
+  const { t } = useTranslation();
+
   const signIn = () => {
     signInWithRedirect(auth, provider).catch((error) => alert(error.message));
   };
@@ -22,7 +25,7 @@ export function Login() {
           <div className='img-section'>
             <img src={googleLetter} alt='' className='g-letter' />
           </div>
-          <span className='btn-text'>Sign in with Google</span>
+          <span className='btn-text'>{t('Sign in with Google')}</span>
         </Button>
 
         {/* buttons for email sign in / sign up */}

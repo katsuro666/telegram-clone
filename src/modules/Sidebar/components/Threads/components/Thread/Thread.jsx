@@ -8,6 +8,7 @@ import { db, realtimeDb } from '../../../../../../firebase';
 import { setThread } from 'features/threadSlice';
 import { selectUser } from 'features/userSlice';
 import { ref, onValue } from 'firebase/database';
+import i18n from '../../../../../../i18n';
 
 export function Thread({ messageData, selectedUser }) {
   const dispatch = useDispatch();
@@ -90,10 +91,10 @@ export function Thread({ messageData, selectedUser }) {
     setUnseenMessages([]);
   };
 
-  const today = new Date().toLocaleDateString('en', { month: 'short', day: 'numeric' });
+  const today = new Date().toLocaleDateString(i18n.language, { month: 'short', day: 'numeric' });
   const lastMsgShortDate = messageList[0]?.timestamp
     ?.toDate()
-    .toLocaleDateString('en', { month: 'short', day: 'numeric' });
+    .toLocaleDateString(i18n.language, { month: 'short', day: 'numeric' });
 
   // !
   // TODO add highlight of the thread you are chatting with
@@ -118,7 +119,7 @@ export function Thread({ messageData, selectedUser }) {
             ) : null}
             <small className={`thread__date ${isThreadOpen && 'thread__date--open'}`}>
               {today === lastMsgShortDate
-                ? messageList[0]?.timestamp?.toDate().toLocaleString('en-gb', {
+                ? messageList[0]?.timestamp?.toDate().toLocaleString(i18n.language, {
                     hour: 'numeric',
                     minute: 'numeric',
                   })

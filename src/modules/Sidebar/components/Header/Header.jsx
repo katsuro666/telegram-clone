@@ -16,10 +16,12 @@ import {
   selectIsSelectLanguageOpen,
 } from 'features/navSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 export function Header({ searchBarValue, setSearchBarValue }) {
   const { ref, isShow, setIsShow } = useOutsideClick(false);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const isUserSearchOpen = useSelector(selectIsUserSearchOpen);
   const isSettingsOpen = useSelector(selectIsSettingsOpen);
@@ -60,7 +62,7 @@ export function Header({ searchBarValue, setSearchBarValue }) {
         <div className='header__search'>
           <SearchIcon className='header__searchIcon' />
           <input
-            placeholder='Search'
+            placeholder={t('Search')}
             type='text'
             autoComplete='off'
             className='header__input'
