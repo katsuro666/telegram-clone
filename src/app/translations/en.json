@@ -20,5 +20,6 @@
   "Language": "Language",
 
   "Message": "Message",
-  "last seen": "last seen"
+  "last seen": "last seen",
+  "loading...": "loading..."
 }

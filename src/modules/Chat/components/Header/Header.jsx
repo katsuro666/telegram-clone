@@ -74,7 +74,7 @@ export function Header() {
     };
 
     if (interlocutorLastOnline === null) {
-      setLastSeenText('loading...');
+      setLastSeenText(t('loading...'));
     } else {
       updateLastSeen();
       var interval = setInterval(() => {
