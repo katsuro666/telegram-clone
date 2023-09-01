@@ -1,46 +1,23 @@
-# Getting Started with Create React App and Redux
+# Telegram clone app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Клон веб версии приложения Телеграм. После авторизации через Google открывается доступ к приложению. Основной мотив - мессенджер с возможностью редактировать собственный профиль.
 
-## Available Scripts
+При первом логине name и username задаются автоматически. Name - имя в Google аккаунте, username - символы до @ в используемой почте. 
+Их можно изменить в настройках (username только в том случае, если он свободен). Также в настройках можно изменить язык, приложение переведено на 2 языка: русский и английский.
+В дополнение к этому, в меню можно сменить тему приложения. Доступно 2 темы, светлая и тёмная.
 
-In the project directory, you can run:
+Чтобы начать чат достаточно воспользоваться поиском по пользователям. Поиск ищет пользователей как по имени, так и по юзернейму. 
+Открытое окно чата максимально похоже на оригинальную версию, кроме кнопок. На данный момент все они являются заглушками (кроме кнопки отправки сообщения). 
+В верхней части открытого чата предоставлена информация о пользователе, с которым ведётся диалог. Его имя, аватар, и онлайн статус, который обновляется через Firebase Realtime Database.
 
-### `npm start`
+Сам чат в зависимости от дат диалога разделяется на блоки по дням, каждое сообщение в новом дне начинается с даты.  Также есть функция, позволяющая видеть, было ли отправленное сообщение прочитано собеседником.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+!! Мобильная версия на данный в разработке, поэтому просмотр возможен только с компьютера.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Готовое приложение
 
-### `npm test`
+https://telegram-clone-1.vercel.app/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Технологии которые используются в проекте
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+React, Redux, Redux toolkit, Firebase, Firebase Realtime Database, formic, yup, i18next
