@@ -1,3 +1,5 @@
+@import '~app/variables/mixins.scss';
+
 .thread {
   display: flex;
   padding: 10px;
@@ -35,8 +37,18 @@
   line-height: 1.375rem;
   align-items: center;
   color: var(--primary-text-color);
-  word-break: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-weight: 700;
+
+  @include tablet {
+    font-size: 14px;
+  }
+
+  @include tablet-s {
+    font-size: 14px;
+  }
 }
 
 .thread__indicators {
@@ -48,6 +60,7 @@
   margin-left: 5px;
   font-size: 12px;
   line-height: 16px;
+  white-space: nowrap;
   color: var(--secondary-text-color);
 
   &--open {
@@ -77,11 +90,19 @@
   font-size: 16px;
   line-height: 20px;
   color: var(--secondary-text-color);
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
 
   &--open {
     color: var(--primary-text-color);
+  }
+
+  @include tablet {
+    font-size: 14px;
+  }
+
+  @include tablet-s {
+    font-size: 14px;
   }
 }
 

@@ -1,3 +1,5 @@
+@import '~app/variables/mixins.scss';
+
 .profile-content {
   display: flex;
   flex-direction: column;
@@ -73,9 +75,17 @@
 .user-settings__text {
   font-size: 16px!important;
   color: var(--primary-text-color);
+
+  @include tablet-s {
+    font-size: 14px!important;
+  }
 }
 
 .user-settings__text--secondary {
   font-size: 16px;
   color: var(--secondary-text-color);
+
+  @include tablet-s {
+    font-size: 14px;
+  }
 }

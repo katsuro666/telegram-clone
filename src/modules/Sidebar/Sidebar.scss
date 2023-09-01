@@ -27,6 +27,14 @@
   &:hover {
     background-color: var(--primary-color-hover)!important;
   }
+
+  @include tablet {
+    left: 24%;
+  }
+
+  @include tablet-s {
+    left: 22%;
+  }
 }
 
 .new-msg__icon {

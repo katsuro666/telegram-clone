@@ -1,3 +1,5 @@
+@import '~app/variables/mixins.scss';
+
 .edit-profile__fields {
   display: flex;
   flex-direction: column;
@@ -11,6 +13,10 @@
 
   & label {
     color: var(--secondary-text-color);
+
+    @include tablet-s {
+      font-size: 18px;
+    }
   }
 
   & fieldset {
@@ -19,6 +25,10 @@
 
   & input {
     color: var(--primary-text-color);
+
+    @include tablet-s {
+      font-size: 16px;
+    }
   }
 }
 

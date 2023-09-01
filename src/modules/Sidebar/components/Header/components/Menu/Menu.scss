@@ -1,3 +1,5 @@
+@import '~app/variables/mixins.scss';
+
 .menu {
   position: absolute;
   left: 7%;
@@ -6,6 +8,13 @@
   background: transparent!important; 
   border-radius: 15px!important;
   
+  @include tablet {
+    width: 90%;
+  }
+
+  @include tablet-s {
+    width: 90%;
+  }
 }
 
 .menu__list {
@@ -32,6 +41,14 @@
 .menu__text * {
   font-size: 16px!important;
   color: var(--primary-text-color);
+
+  @include tablet {
+    font-size: 14px!important;
+  }
+
+  @include tablet-s {
+    font-size: 14px!important;
+  }
 }
 
 .nav-link {
