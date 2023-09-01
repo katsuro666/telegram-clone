@@ -16,7 +16,11 @@ export function Thread({ messageData, selectedUser }) {
   const user = useSelector(selectUser);
   const [unseenMessages, setUnseenMessages] = useState([]);
 
+  // state so that in the future, when choosing a thread, it can be highlighted in Threads
+  // |
+  // V
   const [isThreadOpen, setIsThreadOpen] = useState('');
+
   const [userStatus, setUserStatus] = useState('');
 
   useEffect(() => {
