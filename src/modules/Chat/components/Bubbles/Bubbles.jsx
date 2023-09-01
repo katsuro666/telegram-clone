@@ -89,7 +89,7 @@ export function Bubbles() {
               <Message data={data} />
               <div className='service-msg'>
                 {t(
-                  `${messages[index - 1 && index]?.data?.timestamp
+                  `${messages[index + 1 && index]?.data?.timestamp
                     ?.toDate()
                     .toLocaleDateString(i18n.language, { month: 'long', day: 'numeric' })}`
                 )}

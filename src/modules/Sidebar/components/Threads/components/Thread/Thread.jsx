@@ -43,7 +43,6 @@ export function Thread({ messageData, selectedUser }) {
         if (message.seen === false && message.uid !== user.uid) {
           return message;
         }
-        return null;
       })
     );
   }, [messageList, user.uid]);
