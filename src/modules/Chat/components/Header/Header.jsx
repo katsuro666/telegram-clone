@@ -90,7 +90,7 @@ export function Header() {
         <Avatar src={interlocutorList[0]?.photo} />
         <div className='chat__user'>
           <h4 className='user__name'>{threadName}</h4>
-          <p className='user__last-seen'>{interlocutorStatus === 'online' ? 'online' : `${lastSeenText}`}</p>
+          <p className='user__last-seen'>{interlocutorStatus === 'online' ? `${t('online')}` : `${lastSeenText}`}</p>
         </div>
       </div>
       <div className='chat__utils'>
