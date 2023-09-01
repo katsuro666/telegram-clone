@@ -1,0 +1,48 @@
+/* large desktops */
+@mixin desktop-l {
+  @media (min-width: 1680px){
+      @content;
+  }
+}
+
+/* medium desktops and laptops */
+@mixin desktop-m {
+  @media (min-width: 1200px){
+      @content;
+  }
+}
+
+/* small desktops */
+@mixin desktop-s {
+  @media (min-width: 1025px) and (max-width: 1199px) {
+      @content;
+  }
+}
+
+/* tablets */
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1024px){
+      @content;
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@mixin tablet-s {
+  @media (max-width: 767px){
+      @content;
+  }
+}
+
+/* Landscape phones and smaller */
+@mixin mobile {
+  @media (max-width: 480px){
+      @content;
+  }
+}
+
+// /* small phones ??? */
+// @mixin phone-small {
+//   @media (max-width: 360px){
+//       @content;
+//   }
+// }
