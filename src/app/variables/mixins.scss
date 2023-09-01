@@ -1,20 +1,20 @@
 /* large desktops */
 @mixin desktop-l {
-  @media (min-width: 1680px){
+  @media (min-width: 2001px){
       @content;
   }
 }
 
 /* medium desktops and laptops */
 @mixin desktop-m {
-  @media (min-width: 1200px){
+  @media (min-width: 1441px) and (max-width: 2000px){
       @content;
   }
 }
 
 /* small desktops */
 @mixin desktop-s {
-  @media (min-width: 1025px) and (max-width: 1199px) {
+  @media (min-width: 1025px) and (max-width: 1440px) {
       @content;
   }
 }

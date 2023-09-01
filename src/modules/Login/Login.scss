@@ -1,3 +1,5 @@
+@import '~app/variables/mixins.scss';
+
 .login  {
   display: flex;
   flex-direction: column;
@@ -36,6 +38,10 @@
     scale: 1.05;
     transition: all ease-in-out 0.15s;
   }
+
+  @include tablet-s {
+    min-width: 300px!important;
+  }
 }
 
 .img-section {
@@ -56,6 +62,14 @@
 .btn-text {
   flex: 1;
   color: var(--button-new-message-color);
+
+  @include tablet {
+    font-size: 15px;
+  }
+
+  @include tablet-s {
+    font-size: 14px;
+  }
 }
 
 .login__buttons {
